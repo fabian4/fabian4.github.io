@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Go 环境变量、编程标准、程序测试和基础包 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Go 环境变量、编程标准、程序测试和基础包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go 环境变量、编程标准、程序测试和基础包">
+<meta property="og:url" content="http://example.com/2020/12/14/Go%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E3%80%81%E7%BC%96%E7%A8%8B%E6%A0%87%E5%87%86%E3%80%81%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95%E5%92%8C%E5%9F%BA%E7%A1%80%E5%8C%85/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Go 环境变量、编程标准、程序测试和基础包">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-12T06:39:36.611Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="go">
+<meta property="article:tag" content="语法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Go 环境变量、编程标准、程序测试和基础包" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/14/Go%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E3%80%81%E7%BC%96%E7%A8%8B%E6%A0%87%E5%87%86%E3%80%81%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95%E5%92%8C%E5%9F%BA%E7%A1%80%E5%8C%85/" class="article-date">
+  <time class="dt-published" datetime="2020-12-13T16:00:00.000Z" itemprop="datePublished">2020-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/go/">go</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Go 环境变量、编程标准、程序测试和基础包
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Go-环境变量、编程标准、程序测试和基础包"><a href="#Go-环境变量、编程标准、程序测试和基础包" class="headerlink" title="Go 环境变量、编程标准、程序测试和基础包"></a>Go 环境变量、编程标准、程序测试和基础包</h1><h2 id="一、环境变量"><a href="#一、环境变量" class="headerlink" title="一、环境变量"></a>一、环境变量</h2><p>Go语言各种值类型，包括字符串、整数、浮点数、布尔值等。下面是一些基本示例。</p>
+<p>Go语言最主要的特性：</p>
+<ul>
+<li>自动垃圾回收</li>
+<li>更丰富的内置类型</li>
+<li>函数多返回值</li>
+<li>错误处理</li>
+<li>匿名函数和闭包</li>
+<li>类型和接口</li>
+<li>并发编程</li>
+<li>反射</li>
+<li>语言交互性</li>
+</ul>
+<p>接着熟悉下Go环境变量:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&gt; go env</span><br><span class="line">GO111MODULE=<span class="string">&quot;auto&quot;</span></span><br><span class="line">GOARCH=<span class="string">&quot;amd64&quot;</span></span><br><span class="line">GOBIN=<span class="string">&quot;/Users/admin/goTest/bin&quot;</span></span><br><span class="line">GOCACHE=<span class="string">&quot;/Users/admin/Library/Caches/go-build&quot;</span></span><br><span class="line">GOENV=<span class="string">&quot;/Users/admin/Library/Application Support/go/env&quot;</span></span><br><span class="line">GOEXE=<span class="string">&quot;&quot;</span></span><br><span class="line">GOFLAGS=<span class="string">&quot;&quot;</span></span><br><span class="line">GOHOSTARCH=<span class="string">&quot;amd64&quot;</span></span><br><span class="line">GOHOSTOS=<span class="string">&quot;darwin&quot;</span></span><br><span class="line">GOINSECURE=<span class="string">&quot;&quot;</span></span><br><span class="line">GOMODCACHE=<span class="string">&quot;/Users/admin/goTest/pkg/mod&quot;</span></span><br><span class="line">GONOPROXY=<span class="string">&quot;&quot;</span></span><br><span class="line">GONOSUMDB=<span class="string">&quot;&quot;</span></span><br><span class="line">GOOS=<span class="string">&quot;darwin&quot;</span></span><br><span class="line">GOPATH=<span class="string">&quot;/Users/admin/goTest&quot;</span></span><br><span class="line">GOPRIVATE=<span class="string">&quot;&quot;</span></span><br><span class="line">GOPROXY=<span class="string">&quot;https://goproxy.cn,direct&quot;</span></span><br><span class="line">GOROOT=<span class="string">&quot;/usr/local/go&quot;</span></span><br><span class="line">GOSUMDB=<span class="string">&quot;sum.golang.org&quot;</span></span><br><span class="line">GOTMPDIR=<span class="string">&quot;&quot;</span></span><br><span class="line">GOTOOLDIR=<span class="string">&quot;/usr/local/go/pkg/tool/darwin_amd64&quot;</span></span><br><span class="line">GCCGO=<span class="string">&quot;gccgo&quot;</span></span><br><span class="line">AR=<span class="string">&quot;ar&quot;</span></span><br><span class="line">CC=<span class="string">&quot;clang&quot;</span></span><br><span class="line">CXX=<span class="string">&quot;clang++&quot;</span></span><br><span class="line">CGO_ENABLED=<span class="string">&quot;1&quot;</span></span><br><span class="line">GOMOD=<span class="string">&quot;&quot;</span></span><br><span class="line">CGO_CFLAGS=<span class="string">&quot;-g -O2&quot;</span></span><br><span class="line">CGO_CPPFLAGS=<span class="string">&quot;&quot;</span></span><br><span class="line">CGO_CXXFLAGS=<span class="string">&quot;-g -O2&quot;</span></span><br><span class="line">CGO_FFLAGS=<span class="string">&quot;-g -O2&quot;</span></span><br><span class="line">CGO_LDFLAGS=<span class="string">&quot;-g -O2&quot;</span></span><br><span class="line">PKG_CONFIG=<span class="string">&quot;pkg-config&quot;</span></span><br><span class="line">GOGCCFLAGS=<span class="string">&quot;-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/kp/3yqnp9cj4f3_9539b06q4yyc0000gn/T/go-build238604917=/tmp/go-build -gno-record-gcc-switches -fno-common&quot;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GO111MODULE</td>
+<td>是一个环境变量, on 仍将强制使用Go模块,off 强制Go表现出GOPATH方式,auto 是默认模式。</td>
+</tr>
+<tr>
+<td>GOARCH</td>
+<td>程序构建环境的目标计算架构</td>
+</tr>
+<tr>
+<td>GOBIN</td>
+<td>该环境变量的值为 Go 程序的可执行文件的目录</td>
+</tr>
+<tr>
+<td>GOCACHE</td>
+<td>存储编译后信息的缓存目录</td>
+</tr>
+<tr>
+<td>GOENV</td>
+<td>本地的go环境文件存储位置</td>
+</tr>
+<tr>
+<td>GOEXE</td>
+<td>可执行文件名后缀(“.exe” on Windows)</td>
+</tr>
+<tr>
+<td>GOFLAGS</td>
+<td>当给定标志被当前命令已知时，默认情况下以空格分隔的-flag = value设置列表将应用于go命令。</td>
+</tr>
+<tr>
+<td>GOHOSTARCH</td>
+<td>Go工具链二进制文件的体系结构（GOARCH）。</td>
+</tr>
+<tr>
+<td>GOINSECURE</td>
+<td>逗号分隔的模块路径前缀列表（按Go的path.Match语法），应始终以不安全的方式获取。仅适用于直接获取的依赖项。</td>
+</tr>
+<tr>
+<td>GOMODCACHE</td>
+<td>Go命令将存储下载的模块的目录。</td>
+</tr>
+<tr>
+<td>GOOS</td>
+<td>为其编译代码的操作系统。例如linux，darwin，windows，netbsd。</td>
+</tr>
+<tr>
+<td>GOPATH</td>
+<td>Go 命令依赖一个重要的环境变量,GOPATH允许多个目录，当有多个目录时，请注意分隔符.</td>
+</tr>
+<tr>
+<td>GOPRIVATE</td>
+<td>Go的私有模块仓库</td>
+</tr>
+<tr>
+<td>GOPROXY</td>
+<td>Go的mod代理</td>
+</tr>
+<tr>
+<td>GOROOT</td>
+<td>Go安装目录的绝对路径</td>
+</tr>
+<tr>
+<td>GOSUMDB</td>
+<td>要使用的校验和数据库的名称，以及可选的公用密钥和URL。</td>
+</tr>
+<tr>
+<td>GOTMPDIR</td>
+<td>Go命令将在其中写入临时源文件，程序包和二进制文件的目录。</td>
+</tr>
+<tr>
+<td>GOTOOLDIR</td>
+<td>Go tool的安装目录</td>
+</tr>
+<tr>
+<td>GCCGO</td>
+<td>为”go build -compiler = gccgo”运行的gccgo命令。</td>
+</tr>
+<tr>
+<td>AR</td>
+<td>使用gccgo编译器进行构建时用于处理库归档文件的命令。</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>用于编译C代码</td>
+</tr>
+<tr>
+<td>CXX</td>
+<td>用于编译C代码</td>
+</tr>
+<tr>
+<td>CGO_ENABLED</td>
+<td>是否支持cgo命令</td>
+</tr>
+<tr>
+<td>GOMOD</td>
+<td>主模块go.mod的绝对路径。如果启用了模块感知模式，但没有go.mod，则GOMOD将为os.DevNull</td>
+</tr>
+</tbody></table>
+<h2 id="二、编程标准和规范"><a href="#二、编程标准和规范" class="headerlink" title="二、编程标准和规范"></a>二、编程标准和规范</h2><h3 id="1-行长"><a href="#1-行长" class="headerlink" title="1. 行长"></a>1. 行长</h3><ul>
+<li>一行最长不超过80个字符，超过的使用换行展示，尽量保持格式优雅。</li>
+</ul>
+<h3 id="2-文件名命名规范"><a href="#2-文件名命名规范" class="headerlink" title="2. 文件名命名规范"></a>2. 文件名命名规范</h3><ul>
+<li>文件名命名用小写，尽量见名思义，看见文件名就可以知道这个文件下的大概内容，对于源代码里的文件，文件名要很好的代表了一个模块实现的功能。</li>
+</ul>
+<h3 id="3-包"><a href="#3-包" class="headerlink" title="3. 包"></a>3. 包</h3><ul>
+<li>包名应该为小写单词，不要使用下划线或者混合大小写。</li>
+<li>每个包都应该有一个包注释，包如果有多个go文件，就只需要在入口文件写包注释.</li>
+<li>概况以 Package 开头。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copyright 2009 The Go Authors. All rights reserved.</span></span><br><span class="line"><span class="comment">// Use of this source code is Governed by a BSD-style</span></span><br><span class="line"><span class="comment">// license that can be found in the LICENSE file.</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// Package strings implements simple functions to manipulate strings.</span></span><br><span class="line"><span class="keyword">package</span> strings</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-命名"><a href="#4-命名" class="headerlink" title="4. 命名"></a>4. 命名</h3><ul>
+<li>包名用小写,使用短命名,尽量和标准库不要冲突.</li>
+<li>使用短命名，因为长名字并不会使得事物更易读，文档注释会比格外长的名字更有用.</li>
+<li>需要导出的任何类型必须以大写字母开头.</li>
+</ul>
+<h3 id="5-变量"><a href="#5-变量" class="headerlink" title="5. 变量"></a>5. 变量</h3><ul>
+<li>全局变量：驼峰式，可导出的使用大写字母开头.</li>
+<li>参数传递：驼峰式，小写字母开头.</li>
+<li>局部变量：下划线风格命名.</li>
+</ul>
+<h3 id="6-接口"><a href="#6-接口" class="headerlink" title="6. 接口"></a>6. 接口</h3><ul>
+<li>单个函数的接口名以”er”作为后缀，如Reader,Writer</li>
+<li>接口的实现则去掉“er”</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Reader <span class="keyword">interface</span> &#123;</span><br><span class="line">        Read(p ****<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>两个函数的接口名综合两个函数名</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> WriteFlusher <span class="keyword">interface</span> &#123;</span><br><span class="line">    Write(****<span class="keyword">byte</span>) (<span class="keyword">int</span>, error)</span><br><span class="line">    Flush error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>三个以上函数的接口名，类似于结构体名</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Vehicle <span class="keyword">interface</span> &#123;</span><br><span class="line">    Start(****<span class="keyword">byte</span>) </span><br><span class="line">    Stop error</span><br><span class="line">    Recover</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-函数和结构体"><a href="#7-函数和结构体" class="headerlink" title="7. 函数和结构体"></a>7. 函数和结构体</h3><ul>
+<li>函数名采用驼峰命名法，尽量不要使用下划线</li>
+<li>写概况，并且使用被声明的名字作为开头。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Compile parses a regular expression and returns, if successful, a Regexp</span></span><br><span class="line"><span class="comment">// object that can be used to match against text.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Compile</span><span class="params">(str <span class="keyword">string</span>)</span> <span class="params">(regexp *Regexp, err error)</span></span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Request represents a request to run a command.</span></span><br><span class="line"><span class="keyword">type</span> Request <span class="keyword">struct</span> &#123; ...&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>采用命名的多返回值，在godoc生成的文档中，带有返回值的函数声明更利于理解。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">nextInt</span><span class="params">(b ****<span class="keyword">byte</span>, pos <span class="keyword">int</span>)</span> <span class="params">(value, nextPos <span class="keyword">int</span>, err error)</span></span> &#123;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-import"><a href="#8-import" class="headerlink" title="8.import"></a>8.import</h3><ul>
+<li>对标准包，程序内部包，第三方包进行分组。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;encoding/json&quot;</span>         <span class="comment">//标准包</span></span><br><span class="line">    <span class="string">&quot;strings&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;spike/models&quot;</span>      <span class="comment">//内部包</span></span><br><span class="line">    <span class="string">&quot;spike/utils&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;github.com/go-sql-driver/mysql&quot;</span>    <span class="comment">//第三方包</span></span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>引用包时不要使用相对路径。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误的做法</span></span><br><span class="line"><span class="keyword">import</span> “../net”</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 正确的做法</span></span><br><span class="line"><span class="keyword">import</span> “github.com/repo/proj/src/net”</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-错误处理"><a href="#9-错误处理" class="headerlink" title="9. 错误处理"></a>9. 错误处理</h3><ul>
+<li>error作为函数的值返回,必须尽快对error进行处理</li>
+<li>错误描述如果是英文必须为小写，不需要标点结尾</li>
+<li>采用独立的错误流进行处理</li>
+<li>不要在逻辑代码中使用panic</li>
+</ul>
+<p>不推荐的方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="comment">// error handling</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// normal code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>推荐的方式:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="comment">// error handling</span></span><br><span class="line">    <span class="keyword">return</span> <span class="comment">// or continue, etc.</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// normal code</span></span><br></pre></td></tr></table></figure>
+
+<p>如果返回值需要初始化，则采用下面的方式:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x, err := f</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="comment">// error handling</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// use x</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>panic</li>
+</ul>
+<p>在main包中只有当实在不可运行的情况采用panic，例如文件无法打开，数据库无法连接导致程序无法 正常运行，但是对于其他的package对外的接口不能有panic，只能在包内采用。 建议在main包中使用log.Fatal来记录错误，这样就可以由log来结束程序。</p>
+<ul>
+<li>Recover</li>
+</ul>
+<p>recover用于捕获runtime的异常，禁止滥用recover，在开发测试阶段尽量不要用recover，recover一般放在你认为会有不可预期的异常的地方。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">server</span><span class="params">(workChan &lt;-<span class="keyword">chan</span> *Work)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> work := <span class="keyword">range</span> workChan &#123;</span><br><span class="line">        <span class="keyword">go</span> safelyDo(work)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">safelyDo</span><span class="params">(work *Work)</span></span> &#123;</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>; err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Println(<span class="string">&quot;work failed:&quot;</span>, err)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// do 函数可能会有不可预期的异常</span></span><br><span class="line">    do(work)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Defer</li>
+</ul>
+<p>defer在函数return之前执行，对于一些资源的回收用defer是好的，但也禁止滥用defer，defer是需要消耗性能的,所以频繁调用的函数尽量不要使用defer。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Contents returns the file&#x27;s contents as a string.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Contents</span><span class="params">(filename <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">    f, err := os.Open(filename)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> f.Close  <span class="comment">// f.Close will run when we&#x27;re finished.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> result ****<span class="keyword">byte</span></span><br><span class="line">    buf := <span class="built_in">make</span>(****<span class="keyword">byte</span>, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        n, err := f.Read(buf**<span class="number">0</span>:**)</span><br><span class="line">        result = <span class="built_in">append</span>(result, buf**<span class="number">0</span>:n**...) <span class="comment">// append is discussed later.</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span>, err  <span class="comment">// f will be closed if we return here.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">string</span>(result), <span class="literal">nil</span> <span class="comment">// f will be closed if we return here.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="10-控制结构"><a href="#10-控制结构" class="headerlink" title="10. 控制结构"></a>10. 控制结构</h3><ul>
+<li>if </li>
+</ul>
+<p>if接受初始化语句，约定如下方式建立局部变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err := file.Chmod(<span class="number">0664</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>for</li>
+</ul>
+<p>采用短声明建立局部变量.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sum := <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">    sum += i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>range</li>
+</ul>
+<p>如果只需要第一项（key），就丢弃第二个：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key := <span class="keyword">range</span> m &#123;</span><br><span class="line">    <span class="keyword">if</span> key.expired &#123;</span><br><span class="line">        <span class="built_in">delete</span>(m, key)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果只需要第二项，则把第一项置为下划线.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sum := <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> _, value := <span class="keyword">range</span> array &#123;</span><br><span class="line">    sum += value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>switch</li>
+</ul>
+<p>Go的switch比C更普遍.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">unhex</span><span class="params">(c <span class="keyword">byte</span>)</span> <span class="title">byte</span></span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;0&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> c - <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="string">&#x27;f&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> c - <span class="string">&#x27;a&#x27;</span> + <span class="number">10</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="string">&#x27;F&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> c - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>没有自动转换，但可以用逗号分隔的列表呈现:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">shouldEscape</span><span class="params">(c <span class="keyword">byte</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> c &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;&amp;&#x27;</span>, <span class="string">&#x27;=&#x27;</span>, <span class="string">&#x27;#&#x27;</span>, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;%&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>虽然它们在Go中几乎不像其他类似C语言那么常见，但可以使用break语句尽早终止切换:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n := <span class="number">0</span>; n &lt; <span class="built_in">len</span>(src); n += size &#123;</span><br><span class="line">    <span class="keyword">switch</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> src**n** &lt; sizeOne:</span><br><span class="line">        <span class="keyword">if</span> validateOnly &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        size = <span class="number">1</span></span><br><span class="line">        update(src**n**)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> src**n** &lt; sizeTwo:</span><br><span class="line">        <span class="keyword">if</span> n+<span class="number">1</span> &gt;= <span class="built_in">len</span>(src) &#123;</span><br><span class="line">            err = errShortInput</span><br><span class="line">            <span class="keyword">break</span> Loop</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> validateOnly &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        size = <span class="number">2</span></span><br><span class="line">        update(src**n** + src**n+<span class="number">1</span>**&lt;&lt;shift)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里是使用两个switch语句的字节片的:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Compare returns an integer comparing the two byte slices,</span></span><br><span class="line"><span class="comment">// lexicographically.</span></span><br><span class="line"><span class="comment">// The result will be 0 if a == b, -1 if a &lt; b, and +1 if a &gt; b</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Compare</span><span class="params">(a, b ****<span class="keyword">byte</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(a) &amp;&amp; i &lt; <span class="built_in">len</span>(b); i++ &#123;</span><br><span class="line">        <span class="keyword">switch</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> a**i** &gt; b**i**:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">case</span> a**i** &lt; b**i**:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">switch</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="built_in">len</span>(a) &gt; <span class="built_in">len</span>(b):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> <span class="built_in">len</span>(a) &lt; <span class="built_in">len</span>(b):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用类型断言的语法和关键字类型:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">t = functionOfSomeType</span><br><span class="line"><span class="keyword">switch</span> t := t.(<span class="keyword">type</span>) &#123;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;unexpected type %T\n&quot;</span>, t)     <span class="comment">// %T prints whatever type t has</span></span><br><span class="line"><span class="keyword">case</span> <span class="keyword">bool</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;boolean %t\n&quot;</span>, t)             <span class="comment">// t has type bool</span></span><br><span class="line"><span class="keyword">case</span> <span class="keyword">int</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;integer %d\n&quot;</span>, t)             <span class="comment">// t has type int</span></span><br><span class="line"><span class="keyword">case</span> *<span class="keyword">bool</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;pointer to boolean %t\n&quot;</span>, *t) <span class="comment">// t has type *bool</span></span><br><span class="line"><span class="keyword">case</span> *<span class="keyword">int</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;pointer to integer %d\n&quot;</span>, *t) <span class="comment">// t has type *int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>return </li>
+</ul>
+<p>尽早return：一旦有错误发生，马上返回</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Open(name)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line">d, err := f.Stat</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    f.Close</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line">codeUsing(f, d)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="11-方法的接收器"><a href="#11-方法的接收器" class="headerlink" title="11.方法的接收器"></a>11.方法的接收器</h3><ul>
+<li>名称 一般采用strcut的第一个字母且为小写，而不是this或者其他不符合的命名习惯</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Buffer <span class="keyword">struct</span> &#123;</span><br><span class="line">	buf       ****<span class="keyword">byte</span>   <span class="comment">// contents are the bytes buf**off : len(buf)**</span></span><br><span class="line">	off       <span class="keyword">int</span>      <span class="comment">// read at &amp;buf**off**, write at &amp;buf**len(buf)**</span></span><br><span class="line">	bootstrap **<span class="number">64</span>**<span class="keyword">byte</span> <span class="comment">// memory to hold first slice; helps small buffers avoid allocation.</span></span><br><span class="line">	lastRead  readOp   <span class="comment">// last read operation, so that Unread* can work correctly.</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// <span class="doctag">FIXME:</span> it would be advisable to align Buffer to cachelines to avoid false</span></span><br><span class="line">	<span class="comment">// sharing.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Buffer)</span> <span class="title">Bytes</span> ****<span class="title">byte</span></span> &#123; <span class="keyword">return</span> b.buf**b.off:** &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果接收者是map,slice或者chan，不要用指针传递</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Map</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mp <span class="keyword">map</span>**<span class="keyword">string</span>**<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m mp)</span> <span class="title">Set</span><span class="params">(k, v <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    m**k** = v</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span></span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(mp)</span><br><span class="line">    m.Set(<span class="string">&quot;k&quot;</span>, <span class="string">&quot;v&quot;</span>)</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Channel</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ch <span class="keyword">chan</span> <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ch)</span> <span class="title">Push</span><span class="params">(i <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    c &lt;- i</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ch)</span> <span class="title">Pop</span> <span class="title">interface</span></span>&#123;&#125; &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;-c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span></span> &#123;</span><br><span class="line">    c := <span class="built_in">make</span>(ch, <span class="number">1</span>)</span><br><span class="line">    c.Push(<span class="string">&quot;i&quot;</span>)</span><br><span class="line">    fmt.Println(c.Pop)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果需要对slice进行修改，通过返回值的方式重新赋值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Slice</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> slice ****<span class="keyword">byte</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span></span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>(slice, <span class="number">0</span>)</span><br><span class="line">    s = s.addOne(<span class="number">42</span>)</span><br><span class="line">    fmt.Println(s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s slice)</span> <span class="title">addOne</span><span class="params">(b <span class="keyword">byte</span>)</span> ****<span class="title">byte</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">append</span>(s, b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果接收者是含有sync.Mutex或者类似同步字段的结构体，必须使用指针传递避免复制</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> T <span class="keyword">struct</span> &#123;</span><br><span class="line">    m sync.Mutex</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *T)</span> <span class="title">lock</span></span> &#123;</span><br><span class="line">    t.m.Lock</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span></span> &#123;</span><br><span class="line">    t := <span class="built_in">new</span>(T)</span><br><span class="line">    t.lock</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果接收者是大的结构体或者数组，使用指针传递会更有效率。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> T <span class="keyword">struct</span> &#123;</span><br><span class="line">    data **<span class="number">1024</span>**<span class="keyword">byte</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *T)</span> <span class="title">Get</span> <span class="title">byte</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> t.data**<span class="number">0</span>**</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span></span> &#123;</span><br><span class="line">    t := <span class="built_in">new</span>(T)</span><br><span class="line">    fmt.Println(t.Get)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>append</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a, b ****<span class="keyword">int</span></span><br><span class="line">b = <span class="built_in">append</span>(b, a...)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用strings.TrimPrefix 去掉前缀，strings.TrimSuffix去掉后缀</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">&quot;a value&quot;</span></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">&quot;a&quot;</span></span><br><span class="line"><span class="keyword">var</span> s3 = strings.TrimPrefix(s1, s2)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">&quot;value&quot;</span></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">&quot;e&quot;</span></span><br><span class="line"><span class="keyword">var</span> s3 = strings.TrimSuffix(s1,s2)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="12-使用工具检查你的代码"><a href="#12-使用工具检查你的代码" class="headerlink" title="12.使用工具检查你的代码"></a>12.使用工具检查你的代码</h3><ul>
+<li><strong>go fmt</strong>(<a target="_blank" rel="noopener" href="https://golang.org/pkg/fmt/">https://golang.org/pkg/fmt/</a>)</li>
+<li><strong>go vet</strong>(<a target="_blank" rel="noopener" href="https://golang.org/cmd/vet/">https://golang.org/cmd/vet/</a>)</li>
+<li><strong>go simple</strong>(<a target="_blank" rel="noopener" href="https://github.com/dominikh/go-tools/tree/master/cmd/gosimple">https://github.com/dominikh/go-tools/tree/master/cmd/gosimple</a>)</li>
+<li><strong>go lint</strong>(<a target="_blank" rel="noopener" href="https://github.com/golang/lint">https://github.com/golang/lint</a>)</li>
+<li><strong>errcheck</strong>(<a target="_blank" rel="noopener" href="https://github.com/kisielk/errcheck">https://github.com/kisielk/errcheck</a>)</li>
+<li><strong>misspell</strong>(<a target="_blank" rel="noopener" href="https://github.com/client9/misspell">https://github.com/client9/misspell</a>)</li>
+</ul>
+<h2 id="三、程序测试"><a href="#三、程序测试" class="headerlink" title="三、程序测试"></a>三、程序测试</h2><p>Golang的单元测试采用内置的测试框架,通过引入testing包以及自带的go test命令来实现单元测试和性能测试，testing框架和其他语言中的测试框架类似，你可以基于这个框架写针对相应函数的测试用例，也可以基于该框架写相应的压力测试用例.</p>
+<p>此外建议安装下gotests插件自动生成测试代码:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u -v github.com/cweill/gotests/...</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写测试用例"><a href="#编写测试用例" class="headerlink" title="编写测试用例"></a>编写测试用例</h3><p>因为<code>go test</code>命令只能在一个相应的目录下执行所有文件，所以我们接下来新建一个项目目录<code>gotest</code>,这样我们所有的代码和测试代码都在这个目录下。</p>
+<p>接下来我们在该目录下面创建两个文件：test.go和go_test.go</p>
+<p>test.go:这个文件里面我们是创建了一个包，里面有一个函数实现了除法运算:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> gotest</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;errors&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Division</span><span class="params">(a, b <span class="keyword">float64</span>)</span> <span class="params">(<span class="keyword">float64</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> b == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, errors.New(<span class="string">&quot;除数不能为0&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> a / b, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>go_test.go:这是我们的单元测试文件，但是记住下面的这些原则：</p>
+<ul>
+<li>文件名必须是<code>_test.go</code>结尾的，这样在执行<code>go test</code>的时候才会执行到相应的代码</li>
+<li>你必须import <code>testing</code>这个包</li>
+<li>所有的测试用例函数必须是<code>Test</code>开头</li>
+<li>测试用例会按照源代码中写的顺序依次执行</li>
+<li>测试函数<code>TestXxx</code>的参数是<code>testing.T</code>，我们可以使用该类型来记录错误或者是测试状态</li>
+<li>测试格式：<code>func TestXxx (t *testing.T)</code>,<code>Xxx</code>部分可以为任意的字母数字的组合，但是首字母不能是小写字母<strong>a-z</strong>，例如<code>Testintdiv</code>是错误的函数名。</li>
+</ul>
+<ul>
+<li>函数中通过调用<code>testing.T</code>的<code>Error</code>, <code>Errorf</code>, <code>FailNow</code>, <code>Fatal</code>, <code>FatalIf</code>方法，说明测试不通过，调用<code>Log</code>方法用来记录测试的信息。</li>
+</ul>
+<p>下面是我们的测试用例的代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> gotest</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test_Division_1</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> i, e := Division(<span class="number">6</span>, <span class="number">2</span>); i != <span class="number">3</span> || e != <span class="literal">nil</span> &#123; <span class="comment">//try a unit test on function</span></span><br><span class="line">		t.Error(<span class="string">&quot;除法函数测试没通过&quot;</span>) <span class="comment">// 如果不是如预期的那么就报错</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		t.Log(<span class="string">&quot;第一个测试通过了&quot;</span>) </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test_Division_2</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	t.Error(<span class="string">&quot;error&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们在项目目录下面执行<code>go test</code>,就会显示如下信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">--- FAIL: Test_Division_2 (0.00 seconds)</span><br><span class="line">	go_test.go:16: error</span><br><span class="line">FAIL</span><br><span class="line"><span class="built_in">exit</span> status 1</span><br><span class="line">FAIL	go	0.013s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从这个结果显示测试没有通过，因为在第二个测试函数中我们写死了测试不通过的代码`t.Error`，那么我们的第一个函数执行的情况怎么样呢？默认情况下执行`go test`是不会显示测试通过的信息的，我们需要带上参数`go test -v`，这样就会显示如下信息：</span></span><br><span class="line"></span><br><span class="line">=== RUN Test_Division_1</span><br><span class="line">--- PASS: Test_Division_1 (0.00 seconds)</span><br><span class="line">	go_test.go:11: 第一个测试通过了</span><br><span class="line">=== RUN Test_Division_2</span><br><span class="line">--- FAIL: Test_Division_2 (0.00 seconds)</span><br><span class="line">	go_test.go:16: =error</span><br><span class="line">FAIL</span><br><span class="line"><span class="built_in">exit</span> status 1</span><br><span class="line">FAIL	go	0.012s</span><br></pre></td></tr></table></figure>
+
+
+
+<p>上面的输出详细的展示了这个测试的过程，我们看到测试函数1<code>Test_Division_1</code>测试通过，而测试函数2<code>Test_Division_2</code>测试失败了，最后得出结论测试不通过。接下来我们把测试函数2修改成如下代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test_Division_2</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, e := Division(<span class="number">6</span>, <span class="number">0</span>); e == <span class="literal">nil</span> &#123; <span class="comment">//try a unit test on function</span></span><br><span class="line">		t.Error(<span class="string">&quot;Division did not work as expected.&quot;</span>) <span class="comment">// 如果不是如预期的那么就报错</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		t.Log(<span class="string">&quot;one test passed.&quot;</span>, e) <span class="comment">//记录一些你期望记录的信息</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
+
+<p>然后我们执行<code>go test -v</code>，就显示如下信息，测试通过了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">=== RUN Test_Division_1</span><br><span class="line">--- PASS: Test_Division_1 (0.00 seconds)</span><br><span class="line">	go_test.go:11: 第一个测试通过了</span><br><span class="line">=== RUN Test_Division_2</span><br><span class="line">--- PASS: Test_Division_2 (0.00 seconds)</span><br><span class="line">	go_test.go:20: one <span class="built_in">test</span> passed. 除数不能为0</span><br><span class="line">PASS</span><br><span class="line">ok  	go	0.013s</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写压力测试"><a href="#编写压力测试" class="headerlink" title="编写压力测试"></a>编写压力测试</h3><p>名称以 Benchmark 为名称前缀的函数，只能接受 *testing.B 的参数，这种测试函数是性能压力测试函数。</p>
+<p>压力测试用来检测函数(方法）的性能，和编写单元功能测试的方法类似,此处不再赘述，但需要注意以下几点：</p>
+<ul>
+<li>压力测试用例必须遵循如下格式，其中XXX可以是任意字母数字的组合，但是首字母不能是小写字母</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkXXX</span><span class="params">(b *testing.B)</span></span> &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>go test</code>不会默认执行压力测试的函数，如果要执行压力测试需要带上参数<code>-test.bench</code>，语法:<code>-test.bench=&quot;test_name_regex&quot;</code>,例如<code>go test -test.bench=&quot;.*&quot;</code>表示测试全部的压力测试函数</li>
+<li>在压力测试用例中,请记得在循环体内使用<code>testing.B.N</code>,以使测试可以正常的运行</li>
+<li>文件名也必须以<code>_test.go</code>结尾</li>
+</ul>
+<p>下面我们新建一个压力测试文件webbench_test.go，代码如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> gotest</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Benchmark_Division</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123; <span class="comment">//use b.N for looping </span></span><br><span class="line">		Division(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Benchmark_TimeConsumingFunction</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">	b.StopTimer <span class="comment">//调用该函数停止压力测试的时间计数</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//做一些初始化的工作,例如读取文件数据,数据库连接之类的,</span></span><br><span class="line">	<span class="comment">//这样这些时间不影响我们测试函数本身的性能</span></span><br><span class="line"></span><br><span class="line">	b.StartTimer <span class="comment">//重新开始时间</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">		Division(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们执行命令<code>go test webbench_test.go -test.bench=&quot;.*&quot;</code>，可以看到如下结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Benchmark_Division-4   	                     500000000	      7.76 ns/op	     456 B/op	      14 allocs/op</span><br><span class="line">Benchmark_TimeConsumingFunction-4            500000000	      7.80 ns/op	     224 B/op	       4 allocs/op</span><br><span class="line">PASS</span><br><span class="line">ok  	gotest	9.364s</span><br></pre></td></tr></table></figure>
+
+<p>上面的结果显示我们没有执行任何<code>TestXXX</code>的单元测试函数，显示的结果只执行了压力测试函数，第一条显示了<code>Benchmark_Division</code>执行了500000000次，每次的执行平均时间是7.76纳秒，第二条显示了<code>Benchmark_TimeConsumingFunction</code>执行了500000000，每次的平均执行时间是7.80纳秒。最后一条显示总共的执行时间。</p>
+<p>通过上面对单元测试和压力测试的学习，我们可以看到<code>testing</code>包很轻量，编写单元测试和压力测试用例非常简单，配合内置的<code>go test</code>命令就可以非常方便的进行测试，这样在我们每次修改完代码,执行一下go test就可以简单的完成回归测试了。</p>
+<h2 id="四、基础包"><a href="#四、基础包" class="headerlink" title="四、基础包"></a>四、基础包</h2><ul>
+<li><strong>archive</strong><ul>
+<li><strong>tar–tar包实现了tar格式压缩文件的存取</strong></li>
+<li><strong>zip–zip包提供了zip档案文件的读写服务</strong></li>
+</ul>
+</li>
+<li><strong>bufio–bufio包实现了带缓存的I/O操作</strong></li>
+<li><strong>builtin-builtin包为Go的预声明标识符提供了文档</strong></li>
+<li><strong>bytes–bytes包实现了操作****byte的常用函数</strong></li>
+<li><strong>compress</strong><ul>
+<li><strong>bzip2–bzip2包实现bzip2的解压缩</strong> </li>
+<li><strong>flate–flate包实现了deflate压缩数据格式，参见RFC 1951</strong>   </li>
+<li><strong>gzip–gzip包实现了gzip格式压缩文件的读写，参见RFC 1952</strong>   </li>
+<li><strong>lzw–lzw包实现了Lempel-Ziv-Welch数据压缩格式</strong>   </li>
+<li><strong>zlib–zlib包实现了对zlib格式压缩数据的读写，参见RFC 1950</strong>  </li>
+</ul>
+</li>
+<li><strong>container</strong>      <ul>
+<li><strong>heap–heap包提供了对任意类型（实现了heap.Interface接口）的堆操作</strong> </li>
+<li><strong>list–list包实现了双向链表</strong> </li>
+<li><strong>ring–ring实现了环形链表的操作</strong></li>
+</ul>
+</li>
+<li><strong>context–context包定义了上下文类型,它跨API边界和进程之间传送截止时间，取消信号和其他请求范围的值</strong>   </li>
+<li><strong>crypto–crypto包搜集了常用的密码（算法）常量.</strong> <ul>
+<li><strong>aes–aes包实现了AES加密算法.</strong>      </li>
+<li><strong>cipher–cipher包实现了多个标准的用于包装底层块加密算法的加密算法实现.</strong>      </li>
+<li><strong>des–des包实现了DES标准和TDEA算法.</strong>      </li>
+<li><strong>dsa–dsa包实现FIPS 186-3定义的数字签名算法.</strong>      </li>
+<li><strong>elliptic–elliptic包实现了几条覆盖素数有限域的标准椭圆曲线.</strong>      </li>
+<li><strong>hmac–hmac包实现了规定的HMAC加密哈希信息认证码.</strong>      </li>
+<li><strong>md5–md5包实现了MD5哈希算法.</strong>      </li>
+<li><strong>rand–rand包实现了用于加解密的更安全的随机数生成器.</strong>      </li>
+<li><strong>rc4–rc4包实现了RC4加密算法.</strong>      </li>
+<li><strong>rsa–rsa包实现了PKCS#1规定的RSA加密算法.</strong>      </li>
+<li><strong>sha1–sha1包实现了SHA1哈希算法，参见RFC 3174.</strong>      </li>
+<li><strong>sha256–sha256包实现了SHA224和SHA256哈希算法，参见FIPS 180-4</strong>      </li>
+<li><strong>sha512–sha512包实现了SHA384和SHA512哈希算法，参见FIPS 180-2</strong>(.)      </li>
+<li><strong>subtle–package subtle实现了在加密代码中常用的功能，但需要仔细考虑才能正确使用</strong>      </li>
+<li><strong>tls–tls包实现了TLS 1.2，细节参见RFC 5246</strong>      </li>
+<li><strong>x509–x509包解析X.509编码的证书和密钥</strong>      <ul>
+<li><strong>pkix–pkix包提供了共享的、低层次的结构体，用于ASN.1解析和X.509证书、CRL、OCSP的序列化</strong>      </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>database</strong>   <ul>
+<li><strong>sql–sql包提供了通用的SQL（或类SQL）数据库接口</strong>    <ul>
+<li><strong>driver–driver包定义了应被数据库驱动实现的接口，这些接口会被sql包使用</strong>  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>debug</strong><ul>
+<li><strong>dwarf–提供了对从可执行文件加载的DWARF调试信息的访问</strong>       </li>
+<li><strong>elf–实现了对ELF对象文件的访问</strong>       </li>
+<li><strong>gosym–访问Go语言二进制程序中的调试信息</strong></li>
+<li><strong>macho-实现了Mach-O对象文件的访问</strong></li>
+<li><strong>macho-实现了Mach-O对象文件的访问</strong></li>
+<li><strong>pe-实现了对PE（Microsoft Windows Portable Executable）文件的访问</strong></li>
+<li><strong>plan9obj–plan9obj包实现了对Plan 9 a.out对象文件的访问</strong></li>
+</ul>
+</li>
+<li><strong>encoding–encoding包定义了供其它包使用的可以将数据在字节水平和文本表示之间转换的接口</strong><ul>
+<li><strong>ascii85–ascii85 包是对 ascii85 的数据编码的实现</strong>     </li>
+<li><strong>asn1–asn1包实现了DER编码的ASN.1数据结构的解析，参见ITU-T Rec X.690</strong>     </li>
+<li><strong>base32–base32包实现了RFC 4648规定的base32编码</strong>     </li>
+<li><strong>base64–base64实现了RFC 4648规定的base64编码</strong>     </li>
+<li><strong>binary–binary包实现了简单的数字与字节序列的转换以及变长值的编解码</strong>     </li>
+<li><strong>csv–csv读写逗号分隔值（csv）的文件</strong>     </li>
+<li><strong>gob–gob包管理gob流——在编码器（发送器）和解码器（接受器）之间交换的binary值</strong>     </li>
+<li><strong>hex–hex包实现了16进制字符表示的编解码</strong>     </li>
+<li><strong>json–json包实现了json对象的编解码，参见RFC 4627</strong>     </li>
+<li><strong>pem–pem包实现了PEM数据编码（源自保密增强邮件协议）</strong>     </li>
+<li><strong>xml–xml包实现了一个简单的XML 1.0解析器，它可以理解XML名称空间</strong>  </li>
+</ul>
+</li>
+<li><strong>errors–error包实现了用于错误处理的函数</strong>        </li>
+<li><strong>expvar–expvar包提供了公共变量的标准接口，如服务的操作计数器</strong>        </li>
+<li><strong>flag–flag 包实现命令行标签解析</strong>        </li>
+<li><strong>fmt–fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf</strong></li>
+<li><strong>go</strong><ul>
+<li><strong>ast–ast包声明了用于展示Go包中的语法树类型</strong> </li>
+<li><strong>build–build包提供了构建Go包的工具</strong> </li>
+<li><strong>constant–constant包实现表示无类型Go常量及其相应操作的值</strong> </li>
+<li><strong>doc–doc包从Go AST中提取源代码文档</strong> </li>
+<li><strong>format–format包实现Go源的标准格式</strong> </li>
+<li><strong>importer–importer包提供对导出数据导入程序的访问</strong> </li>
+<li><strong>parser–parser包为Go源文件实现解析器</strong> </li>
+<li><strong>printer–printer包实现AST节点的打印</strong> </li>
+<li><strong>scanner–scanner包为Go源文本实现扫描程序</strong> </li>
+<li><strong>token–token包表示Go语言的词法标记的常量和标记的基本操作</strong> </li>
+<li><strong>types–types包声明数据类型并实现Go包类型检查的算法</strong> </li>
+</ul>
+</li>
+<li><strong>hash–hash包提供hash函数的接口</strong><ul>
+<li><strong>adler32–adler32包实现了Adler-32校验和算法，参见RFC 1950</strong></li>
+<li><strong>crc32–crc32包实现了32位循环冗余校验（CRC-32）的校验和算法</strong></li>
+<li><strong>crc64–crc64包实现64位循环冗余校验或CRC-64校验</strong></li>
+<li><strong>fnv–fnv包实现了FNV-1和FNV-1a（非加密hash函数）</strong></li>
+</ul>
+</li>
+<li><strong>html–html包提供了用于转义和解转义HTML文本的函数</strong><ul>
+<li><strong>template–template包（html/template）实现了数据驱动的模板，用于生成可对抗代码注入的安全HTML输出</strong>   </li>
+</ul>
+</li>
+<li><strong>image–image实现了基本的2D图片库</strong>      <ul>
+<li><strong>color–color包实现了基本的颜色库</strong>     <ul>
+<li><strong>palette–palette包提供了标准的调色板</strong>  </li>
+</ul>
+</li>
+<li><strong>draw–draw包提供组装图片的方法</strong>      </li>
+<li><strong>gif–gif包实现了GIF图片的解码</strong>      </li>
+<li><strong>jpeg–jpeg包实现了jpeg格式图像的编解码</strong>      </li>
+<li><strong>png–png包实现了PNG图像的编码和解码</strong> </li>
+</ul>
+</li>
+<li><strong>index</strong>          <ul>
+<li><strong>suffixarray–suffixarrayb包通过使用内存中的后缀树实现了对数级时间消耗的子字符串搜索</strong></li>
+</ul>
+</li>
+<li><strong>io–io包为I/O原语提供了基础的接口</strong><ul>
+<li><strong>ioutil–ioutil包实现了一些I/O的工具函数</strong></li>
+</ul>
+</li>
+<li><strong>log–log包实现了简单的日志服务</strong>   <ul>
+<li><strong>syslog–syslog包提供一个简单的系统日志服务的接口</strong>  </li>
+</ul>
+</li>
+<li><strong>math(math–math包提供了基本常数和数学函数)</strong><ul>
+<li><strong>big–big包实现了（大数的）高精度运算.</strong></li>
+<li><strong>cmplx–cmplx包为复数提供了基本的常量和数学函数</strong></li>
+<li><strong>rand–rand包实现了伪随机数生成器</strong></li>
+</ul>
+</li>
+<li><strong>mime–mime实现了MIME的部分规定</strong><ul>
+<li><strong>multipart–multipart实现了MIME的multipart解析，参见RFC 2046</strong></li>
+<li><strong>quotedprintable–quotedprintable包实现RFC 2045指定的quoted-printable编码</strong></li>
+</ul>
+</li>
+<li><strong>net–net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket</strong>     <ul>
+<li><strong>http–http包提供了HTTP客户端和服务端的实现</strong> <ul>
+<li><strong>cgi–cgi包实现了RFC3875协议描述的CGI(公共网关接口)</strong></li>
+<li><strong>cookiejar–cookiejar包实现了保管在内存中的符合RFC6265标准的http.CookieJar接口</strong></li>
+<li><strong>fcgi–fcgi包实现了FastCGI协议</strong></li>
+<li><strong>httptest–httptest包提供HTTP测试的单元工具</strong></li>
+<li><strong>httptrace–httptrace包提供了跟踪HTTP客户端请求中的事件的机制</strong></li>
+<li><strong>httputil–httputil包提供了HTTP公用函数，是对net/http包的更常见函数的补充</strong></li>
+<li><strong>pprof–pprof包通过提供HTTP服务返回runtime的统计数据，这个数据是以pprof可视化工具规定的返回格式返回的</strong></li>
+</ul>
+</li>
+<li><strong>mail–mail包实现了解析邮件消息的功能</strong></li>
+<li><strong>rpc–rpc包提供了一个方法来通过网络或者其他的I/O连接进入对象的外部方法</strong><ul>
+<li><strong>jsonrpc–jsonrpc包使用了rpc的包实现了一个JSON-RPC的客户端解码器和服务端的解码器</strong></li>
+</ul>
+</li>
+<li><strong>smtp–smtp包实现了简单邮件传输协议（SMTP），参见RFC 5321</strong>    </li>
+<li><strong>textproto–textproto实现了对基于文本的请求/回复协议的一般性支持，包括HTTP、NNTP和SMTP</strong></li>
+<li><strong>url–url包解析URL并实现了查询的逸码，参见RFC 3986</strong></li>
+</ul>
+</li>
+<li><strong>os–os包提供了操作系统函数的不依赖平台的接口</strong><ul>
+<li><strong>exec–exec包执行外部命令</strong>     </li>
+<li><strong>signal–signal包实现了对输入信号的访问</strong>     </li>
+<li><strong>user–user包允许通过名称或ID查询用户帐户</strong>   </li>
+</ul>
+</li>
+<li><strong>path–path包实现了对斜杠分隔的路径的实用操作函数</strong>  <ul>
+<li><strong>filepath–filepath包实现了兼容各操作系统的文件路径的实用操作函数</strong>   </li>
+</ul>
+</li>
+<li><strong>plugin–plugin包实现了Go插件的加载和符号解析</strong> </li>
+<li><strong>reflect–reflect包实现了运行时反射，允许程序操作任意类型的对象</strong>   </li>
+<li><strong>regexp–regexp包实现了正则表达式搜索</strong>      <ul>
+<li><strong>syntax–syntax包将正则表达式解析为语法树</strong>      </li>
+</ul>
+</li>
+<li><strong>runtime–runtime包含与Go的运行时系统进行交互的操作，例如用于控制Go程的函数</strong>      <ul>
+<li><strong>cgo–cgo包含有cgo工具生成的代码的运行时支持</strong>      </li>
+<li><strong>debug–debug包含有程序在运行时调试其自身的功能</strong>      </li>
+<li><strong>pprof–pprof包按照可视化工具pprof所要求的格式写出运行时分析数据</strong>      </li>
+<li><strong>race–race包实现了数据竞争检测逻辑</strong>      </li>
+<li><strong>trace–trace包实现了Go执行追踪</strong>    </li>
+</ul>
+</li>
+<li><strong>sort–sort包为切片及用户定义的集合的排序操作提供了原语</strong>   </li>
+<li><strong>strconv–strconv包实现了基本数据类型和其字符串表示的相互转换</strong></li>
+<li><strong>strings–strings包完成对字符串的主要操作</strong></li>
+<li><strong>sync–sync包提供了互斥锁这类的基本的同步原语</strong>    <ul>
+<li><strong>atomic–atomic包提供了底层的原子性内存原语，这对于同步算法的实现很有用</strong>    </li>
+<li><strong>Map–线程安全的map</strong>    </li>
+<li><strong>Mutex–互斥锁</strong>    </li>
+<li><strong>Cond–条件变量</strong>    </li>
+<li><strong>Pool–临时对象池</strong>    </li>
+<li><strong>Once–执行一次</strong>    </li>
+<li><strong>RWMutex–读写操作的互斥锁</strong>    </li>
+<li><strong>waitGroup–用于等待一组goroutine 结束</strong>    </li>
+</ul>
+</li>
+<li><strong>syscall–syscall包含低级操作系统原语的接口</strong>    </li>
+<li><strong>testing–testing包为Go的自动测试提供支持</strong><ul>
+<li><strong>iotest–iotest包实现了主要用于读和写的测试</strong></li>
+<li><strong>quick–quick包实现实用程序功能，以帮助进行黑盒测试</strong></li>
+</ul>
+</li>
+<li><strong>text</strong>     <ul>
+<li><strong>scanner–scanner包提供对utf-8文本的token扫描服务</strong></li>
+<li><strong>tabwriter–tabwriter包实现了写入过滤器（tabwriter.Writer），可以将输入的缩进修正为正确的对齐文本</strong></li>
+<li><strong>template–template包实现了数据驱动的用于生成文本输出的模板</strong><ul>
+<li><strong>parse–parse包为文本/模板和html /模板定义的模板构建解析树</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>time–time包提供了时间的显示和测量用的函数</strong>        </li>
+<li><strong>unicode–unicode 包提供了一些测试Unicode码点属性的数据和函数</strong>    <ul>
+<li><strong>utf16–utf16包实现了对UTF-16序列的编码和解码</strong>    </li>
+<li><strong>utf8–utf8包实现支持UTF-8文本编码的函数和常量</strong>   </li>
+</ul>
+</li>
+<li><strong>unsafe–unsafe包含有关于Go程序类型安全的所有操作</strong>      </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/14/Go%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E3%80%81%E7%BC%96%E7%A8%8B%E6%A0%87%E5%87%86%E3%80%81%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95%E5%92%8C%E5%9F%BA%E7%A1%80%E5%8C%85/" data-id="ckr0qt569007ttwjw7sp6d7ez" data-title="Go 环境变量、编程标准、程序测试和基础包" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/15/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          通信协议
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/13/Go%20%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Go 的并发处理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/go/">go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">通信协议</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LogBack/" rel="tag">LogBack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQTT/" rel="tag">MQTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrapy/" rel="tag">Scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/" rel="tag">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm/" rel="tag">arm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp/" rel="tag">frp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pygame/" rel="tag">pygame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="tag">回溯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" rel="tag">嵌入式Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" rel="tag">服务器搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" rel="tag">穷举法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag">通信协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Django/" style="font-size: 12.5px;">Django</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/JWT/" style="font-size: 11.25px;">JWT</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 11.25px;">Linux</a> <a href="/tags/LogBack/" style="font-size: 10px;">LogBack</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scrapy/" style="font-size: 10px;">Scrapy</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 18.75px;">SpringBoot</a> <a href="/tags/SpringSecurity/" style="font-size: 12.5px;">SpringSecurity</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/frp/" style="font-size: 10px;">frp</a> <a href="/tags/go/" style="font-size: 15px;">go</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/pygame/" style="font-size: 12.5px;">pygame</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">博客搭建</a> <a href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">回溯算法</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 13.75px;">多线程</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" style="font-size: 10px;">嵌入式Linux</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 11.25px;">微信小程序</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10px;">快捷键</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 11.25px;">日志</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">服务器搭建</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10px;">树莓派</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 11.25px;">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">环境配置</a> <a href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" style="font-size: 10px;">穷举法</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 13.75px;">笔记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 12.5px;">设计模式</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 17.5px;">语法</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">通信协议</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 10px;">阿里云</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/12/T/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/10/Spring%20%E4%B8%AD%E7%9A%849%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Spring 中的9种设计模式</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/08/JAVA%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">JAVA 排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/05/%E4%BD%BF%E7%94%A8%20frp%20%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">使用 frp 搭建内网穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/20/JVM%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">JVM 垃圾回收</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

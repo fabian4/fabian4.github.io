@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Django 的数据库操作 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Django 的数据库操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django 的数据库操作">
+<meta property="og:url" content="http://example.com/2020/05/01/Django%20%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Django 的数据库操作">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/Ar2xiTqSnLYwENW.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/a7sgOn2oUDvt5Ld.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/k2S8ADFn4BKib1f.png">
+<meta property="article:published_time" content="2020-04-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-12T06:39:36.512Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/Ar2xiTqSnLYwENW.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Django 的数据库操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/05/01/Django%20%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="dt-published" datetime="2020-04-30T16:00:00.000Z" itemprop="datePublished">2020-05-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Django 的数据库操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Django-的数据库操作"><a href="#Django-的数据库操作" class="headerlink" title="Django 的数据库操作"></a>Django 的数据库操作</h1><p>有之前的基础，那么我们就可以开始对数据库进行操作。</p>
+<h2 id="一、数据库配置"><a href="#一、数据库配置" class="headerlink" title="一、数据库配置"></a>一、数据库配置</h2><h3 id="配置-MySql"><a href="#配置-MySql" class="headerlink" title="配置  MySql"></a>配置  MySql</h3><p>在<strong>主目录</strong>的 <code>settings.py</code>  中修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,  <span class="comment"># 数据库驱动</span></span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;&#x27;</span>, <span class="comment"># 被操作数据库名称</span></span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="comment"># 数据库位置</span></span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: <span class="number">3306</span>, <span class="comment"># 端口号</span></span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;&#x27;</span>, <span class="comment"># 用户名</span></span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;&#x27;</span>,	<span class="comment"># 密码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>数据库驱动</p>
+<ul>
+<li><code>&#39;django.db.backends.sqlite3&#39;</code>：SQLite嵌入式数据库。</li>
+<li><code>&#39;django.db.backends.postgresql&#39;</code>：BSD许可证下发行的开源关系型数据库产品。</li>
+<li><code>&#39;django.db.backends.mysql&#39;</code>：转手多次目前属于甲骨文公司的经济高效的数据库产品。</li>
+<li><code>&#39;django.db.backends.oracle&#39;</code>：甲骨文公司的关系型数据库旗舰产品。</li>
+</ul>
+</blockquote>
+<p>如果你没有安装数据库依赖还需要：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ pip install pymysql</span><br></pre></td></tr></table></figure>
+
+<p>然后在<strong>项目目录</strong>的<code>__init__.py</code>：中对数据库驱动初始化。<br>从而避免Django找不到连接MySQL的客户端工具而询问你：“Did you install mysqlclient? ”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建模型构建数据表"><a href="#创建模型构建数据表" class="headerlink" title="创建模型构建数据表"></a>创建模型构建数据表</h3><ul>
+<li><p>创建一个app应用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python manage.py startapp user</span><br></pre></td></tr></table></figure></li>
+<li><p>将应用注册到项目中去</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目目录中的 settings.py</span></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;user&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li><p>注册路由跳转</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 项目目录中的 urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(<span class="string">&#x27;user.urls&#x27;</span>)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li><p>构建数据模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 应用目录的 models.py</span></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;用户类&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    no = models.IntegerField(primary_key=<span class="literal">True</span>, db_column=<span class="string">&#x27;no&#x27;</span>, verbose_name=<span class="string">&#x27;编号&#x27;</span>)</span><br><span class="line">    name = models.IntegerField(db_column=<span class="string">&#x27;name&#x27;</span>, verbose_name=<span class="string">&#x27;名字&#x27;</span>)</span><br><span class="line">    gender = models.CharField(max_length=<span class="number">20</span>, db_column=<span class="string">&#x27;gender&#x27;</span>, verbose_name=<span class="string">&#x27;性别&#x27;</span>)</span><br><span class="line">    age = models.CharField(max_length=<span class="number">20</span>, db_column=<span class="string">&#x27;age&#x27;</span>, verbose_name=<span class="string">&#x27;年龄&#x27;</span>)</span><br><span class="line">    address = models.CharField(max_length=<span class="number">20</span>, db_column=<span class="string">&#x27;address&#x27;</span>, verbose_name=<span class="string">&#x27;籍贯&#x27;</span>)</span><br><span class="line">    qq = models.IntegerField(db_column=<span class="string">&#x27;qq&#x27;</span>, verbose_name=<span class="string">&#x27;QQ&#x27;</span>)</span><br><span class="line">    email = models.CharField(max_length=<span class="number">20</span>, db_column=<span class="string">&#x27;email&#x27;</span>, verbose_name=<span class="string">&#x27;邮箱&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">&#x27;user&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Admin</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;管理员&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    no = models.IntegerField(primary_key=<span class="literal">True</span>, db_column=<span class="string">&#x27;no&#x27;</span>, verbose_name=<span class="string">&#x27;编号&#x27;</span>)</span><br><span class="line">    username = models.CharField(max_length=<span class="number">20</span>, db_column=<span class="string">&#x27;username&#x27;</span>, verbose_name=<span class="string">&#x27;用户名&#x27;</span>)</span><br><span class="line">    password = models.CharField(max_length=<span class="number">20</span>, db_column=<span class="string">&#x27;password&#x27;</span>, verbose_name=<span class="string">&#x27;密码&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">&#x27;manager&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>生成数据表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 迁移 Django 内置的管理数据表</span></span><br><span class="line">(venv)$ python manage.py migrate</span><br><span class="line"><span class="comment"># 生成我们的数据迁移文件</span></span><br><span class="line">(venv)$ python manage.py makemigrations user</span><br><span class="line"><span class="comment"># 迁移我们的数据表</span></span><br><span class="line">(venv)$ python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/Ar2xiTqSnLYwENW.png"></p>
+<blockquote>
+<p> 可以看出除了最后两张表，上面都是Django为我们默认配置的数据表</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="二、登录-Django-的后台管理系统"><a href="#二、登录-Django-的后台管理系统" class="headerlink" title="二、登录 Django 的后台管理系统"></a>二、登录 Django 的后台管理系统</h2><blockquote>
+<p>Django框架有自带的后台管理系统来实现对模型的管理。虽然实际应用中，这个后台可能并不能满足我们的需求，但是在学习Django框架时，我们暂时可以利用Django自带的后台管理系统来管理我们的模型，同时也可以了解一个项目的后台管理系统到底需要哪些功能。</p>
+</blockquote>
+<h4 id="注册一个超级管理员账号"><a href="#注册一个超级管理员账号" class="headerlink" title="注册一个超级管理员账号"></a>注册一个超级管理员账号</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python manage.py createsuperuser</span><br><span class="line">Username :</span><br><span class="line">Email address:</span><br><span class="line">Password: </span><br><span class="line">Password (again): </span><br><span class="line">Superuser created successfully.</span><br></pre></td></tr></table></figure>
+
+<h4 id="然后我们启动-Django"><a href="#然后我们启动-Django" class="headerlink" title="然后我们启动 Django"></a>然后我们启动 Django</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python manage.py runserver</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问-http-127-0-0-1-8000-admin"><a href="#访问-http-127-0-0-1-8000-admin" class="headerlink" title="访问 http://127.0.0.1:8000/admin"></a>访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:8000/admin">http://127.0.0.1:8000/admin</a></h4><p>  <img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/a7sgOn2oUDvt5Ld.png"></p>
+<p>输入刚刚注册的账号密码就可以用 Django 提供的图形界面来操作我们的数据库了  <img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/k2S8ADFn4BKib1f.png"></p>
+<p>  这里会记录我们对数据库的所有操作</p>
+<h2 id="三、模型定义参考"><a href="#三、模型定义参考" class="headerlink" title="三、模型定义参考"></a>三、模型定义参考</h2><h4 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h4><p>  对字段名称的限制</p>
+<ul>
+<li>字段名不能是Python的保留字，否则会导致语法错误</li>
+<li>字段名不能有多个连续下划线，否则影响ORM查询操作</li>
+</ul>
+<p>  Django模型字段类</p>
+<table>
+<thead>
+<tr>
+<th>字段类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AutoField</td>
+<td>自增ID字段</td>
+</tr>
+<tr>
+<td>BigIntegerField</td>
+<td>64位有符号整数</td>
+</tr>
+<tr>
+<td>BinaryField</td>
+<td>存储二进制数据的字段，对应Python的bytes类型</td>
+</tr>
+<tr>
+<td>BooleanField</td>
+<td>存储True或False</td>
+</tr>
+<tr>
+<td>CharField</td>
+<td>长度较小的字符串</td>
+</tr>
+<tr>
+<td>DateField</td>
+<td>存储日期，有auto_now和auto_now_add属性</td>
+</tr>
+<tr>
+<td>DateTimeField</td>
+<td>存储日期和日期，两个附加属性同上</td>
+</tr>
+<tr>
+<td>DecimalField</td>
+<td>存储固定精度小数，有max_digits（有效位数）和decimal_places（小数点后面）两个必要的参数</td>
+</tr>
+<tr>
+<td>DurationField</td>
+<td>存储时间跨度</td>
+</tr>
+<tr>
+<td>EmailField</td>
+<td>与CharField相同，可以用EmailValidator验证</td>
+</tr>
+<tr>
+<td>FileField</td>
+<td>文件上传字段</td>
+</tr>
+<tr>
+<td>FloatField</td>
+<td>存储浮点数</td>
+</tr>
+<tr>
+<td>ImageField</td>
+<td>其他同FileFiled，要验证上传的是不是有效图像</td>
+</tr>
+<tr>
+<td>IntegerField</td>
+<td>存储32位有符号整数。</td>
+</tr>
+<tr>
+<td>GenericIPAddressField</td>
+<td>存储IPv4或IPv6地址</td>
+</tr>
+<tr>
+<td>NullBooleanField</td>
+<td>存储True、False或null值</td>
+</tr>
+<tr>
+<td>PositiveIntegerField</td>
+<td>存储无符号整数（只能存储正数）</td>
+</tr>
+<tr>
+<td>SlugField</td>
+<td>存储slug（简短标注）</td>
+</tr>
+<tr>
+<td>SmallIntegerField</td>
+<td>存储16位有符号整数</td>
+</tr>
+<tr>
+<td>TextField</td>
+<td>存储数据量较大的文本</td>
+</tr>
+<tr>
+<td>TimeField</td>
+<td>存储时间</td>
+</tr>
+<tr>
+<td>URLField</td>
+<td>存储URL的CharField</td>
+</tr>
+<tr>
+<td>UUIDField</td>
+<td>存储全局唯一标识符</td>
+</tr>
+</tbody></table>
+<h4 id="字段属性"><a href="#字段属性" class="headerlink" title="字段属性"></a>字段属性</h4><p>  通用字段属性</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>null</td>
+<td>数据库中对应的字段是否允许为NULL，默认为False</td>
+</tr>
+<tr>
+<td>blank</td>
+<td>后台模型管理验证数据时，是否允许为NULL，默认为False</td>
+</tr>
+<tr>
+<td>choices</td>
+<td>设定字段的选项，各元组中的第一个值是设置在模型上的值，第二值是人类可读的值</td>
+</tr>
+<tr>
+<td>db_column</td>
+<td>字段对应到数据库表中的列名，未指定时直接使用字段的名称</td>
+</tr>
+<tr>
+<td>db_index</td>
+<td>设置为True时将在该字段创建索引</td>
+</tr>
+<tr>
+<td>db_tablespace</td>
+<td>为有索引的字段设置使用的表空间，默认为DEFAULT_INDEX_TABLESPACE</td>
+</tr>
+<tr>
+<td>default</td>
+<td>字段的默认值</td>
+</tr>
+<tr>
+<td>editable</td>
+<td>字段在后台模型管理或ModelForm中是否显示，默认为True</td>
+</tr>
+<tr>
+<td>error_messages</td>
+<td>设定字段抛出异常时的默认消息的字典，其中的键包括null、blank、invalid、invalid_choice、unique和unique_for_date</td>
+</tr>
+<tr>
+<td>help_text</td>
+<td>表单小组件旁边显示的额外的帮助文本。</td>
+</tr>
+<tr>
+<td>primary_key</td>
+<td>将字段指定为模型的主键，未指定时会自动添加AutoField用于主键，只读。</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>设置为True时，表中字段的值必须是唯一的</td>
+</tr>
+<tr>
+<td>verbose_name</td>
+<td>字段在后台模型管理显示的名称，未指定时使用字段的名称</td>
+</tr>
+</tbody></table>
+<p>  ForeignKey属性</p>
+<ol>
+<li>limit_choices_to：值是一个Q对象或返回一个Q对象，用于限制后台显示哪些对象。</li>
+<li>related_name：用于获取关联对象的关联管理器对象（反向查询），如果不允许反向，该属性应该被设置为<code>&#39;+&#39;</code>，或者以<code>&#39;+&#39;</code>结尾。</li>
+<li>to_field：指定关联的字段，默认关联对象的主键字段。</li>
+<li>db_constraint：是否为外键创建约束，默认值为True。</li>
+<li>on_delete：外键关联的对象被删除时对应的动作，可取的值包括django.db.models中定义的：<ul>
+<li>CASCADE：级联删除。</li>
+<li>PROTECT：抛出ProtectedError异常，阻止删除引用的对象。</li>
+<li>SET_NULL：把外键设置为null，当null属性被设置为True时才能这么做。</li>
+<li>SET_DEFAULT：把外键设置为默认值，提供了默认值才能这么做。</li>
+</ul>
+</li>
+</ol>
+<p>  ManyToManyField属性</p>
+<ol>
+<li>symmetrical：是否建立对称的多对多关系。</li>
+<li>through：指定维持多对多关系的中间表的Django模型。</li>
+<li>throughfields：定义了中间模型时可以指定建立多对多关系的字段。</li>
+<li>db_table：指定维持多对多关系的中间表的表名。</li>
+</ol>
+<h4 id="模型元数据选项"><a href="#模型元数据选项" class="headerlink" title="模型元数据选项"></a>模型元数据选项</h4><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abstract</td>
+<td>设置为True时模型是抽象父类</td>
+</tr>
+<tr>
+<td>app_label</td>
+<td>如果定义模型的应用不在INSTALLED_APPS中可以用该属性指定</td>
+</tr>
+<tr>
+<td>db_table</td>
+<td>模型使用的数据表名称</td>
+</tr>
+<tr>
+<td>db_tablespace</td>
+<td>模型使用的数据表空间</td>
+</tr>
+<tr>
+<td>default_related_name</td>
+<td>关联对象回指这个模型时默认使用的名称，默认为<model_name>_set</td>
+</tr>
+<tr>
+<td>get_latest_by</td>
+<td>模型中可排序字段的名称。</td>
+</tr>
+<tr>
+<td>managed</td>
+<td>设置为True时，Django在迁移中创建数据表并在执行flush管理命令时把表移除</td>
+</tr>
+<tr>
+<td>order_with_respect_to</td>
+<td>标记对象为可排序的</td>
+</tr>
+<tr>
+<td>ordering</td>
+<td>对象的默认排序</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>创建对象时写入权限表的额外权限</td>
+</tr>
+<tr>
+<td>default_permissions</td>
+<td>默认为<code>(&#39;add&#39;, &#39;change&#39;, &#39;delete&#39;)</code></td>
+</tr>
+<tr>
+<td>unique_together</td>
+<td>设定组合在一起时必须独一无二的字段名</td>
+</tr>
+<tr>
+<td>index_together</td>
+<td>设定一起建立索引的多个字段名</td>
+</tr>
+<tr>
+<td>verbose_name</td>
+<td>为对象设定人类可读的名称</td>
+</tr>
+<tr>
+<td>verbose_name_plural</td>
+<td>设定对象的复数名称</td>
+</tr>
+</tbody></table>
+<h3 id="查询参考"><a href="#查询参考" class="headerlink" title="查询参考"></a>查询参考</h3><p>  按字段查找可以用的条件：</p>
+<ol>
+<li>exact / iexact：精确匹配/忽略大小写的精确匹配查询</li>
+<li>contains / icontains / startswith / istartswith / endswith / iendswith：基于<code>like</code>的模糊查询</li>
+<li>in：集合运算</li>
+<li>gt / gte / lt / lte：大于/大于等于/小于/小于等于关系运算</li>
+<li>range：指定范围查询（SQL中的<code>between…and…</code>）</li>
+<li>year / month / day / week_day / hour / minute / second：查询时间日期</li>
+<li>isnull：查询空值（True）或非空值（False）</li>
+<li>search：基于全文索引的全文检索</li>
+<li>regex / iregex：基于正则表达式的模糊匹配查询</li>
+</ol>
+<h2 id="四、静态页面映射"><a href="#四、静态页面映射" class="headerlink" title="四、静态页面映射"></a>四、静态页面映射</h2><p>  我们将我们的实现准备好的 html 文件反正根目录的 <strong>templates</strong> 文件夹里面，再创建一个 <strong>static</strong> 文件夹来存放我们的 js、css、font之类的资源文件。最后配置我们的资源映射</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目目录的 settings.py</span></span><br><span class="line">STATIC_URL = <span class="string">&#x27;/static/&#x27;</span></span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">    os.path.join(BASE_DIR, <span class="string">&#x27;static&#x27;</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>  在 html 中引入资源文件</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在最前面加载静态文件 --&gt;</span></span><br><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 在html的head标签中 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 1. 导入CSS的全局样式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &quot;</span><span class="attr">css</span>/<span class="attr">bootstrap.min.css</span>&quot; %&#125;&quot; <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 2. jQuery导入 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &quot;</span><span class="attr">js</span>/<span class="attr">jquery-2.1.0.min.js</span>&quot; %&#125;&quot;&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 3. 导入bootstrap的js文件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &quot;</span><span class="attr">js</span>/<span class="attr">bootstrap.min.js</span>&quot; %&#125;&quot;&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="五、基本增删改查语句"><a href="#五、基本增删改查语句" class="headerlink" title="五、基本增删改查语句"></a>五、基本增删改查语句</h2>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> user <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="comment"># 第一种方法：</span></span><br><span class="line">    models.Admin.objects.create(username=<span class="string">&#x27;userme&#x27;</span>, password=<span class="string">&#x27;1234&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 第二种方法：添加数据，实例化表类，在实例化里传参为字段和值</span></span><br><span class="line">    obj = models.Admin(username=<span class="string">&#x27;userme&#x27;</span>, password=<span class="string">&#x27;1234&#x27;</span>)</span><br><span class="line">    <span class="comment"># 写入数据库</span></span><br><span class="line">    obj.save()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 第三种方法：将要写入的数据组合成字典，键为字段值为数据</span></span><br><span class="line">    dic = &#123;<span class="string">&#x27;username&#x27;</span>:<span class="string">&#x27;userme&#x27;</span>, <span class="string">&#x27;password&#x27;</span>:<span class="string">&#x27;1234&#x27;</span>&#125;</span><br><span class="line">    <span class="comment"># 添加到数据库，注意字典变量名称一定要加**</span></span><br><span class="line">    models.Admin.objects.create(**dic)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="comment"># 删除数据</span></span><br><span class="line">    models.Admin.objects.<span class="built_in">filter</span>(username=<span class="string">&#x27;userme&#x27;</span>).delete()</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="comment"># 修改数据</span></span><br><span class="line">    models.Admin.objects.<span class="built_in">filter</span>(username=<span class="string">&#x27;userme&#x27;</span>).update(username=<span class="string">&#x27;admin&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>下面是 Django框架的一些基本查询 API 整理</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">all():</span> <span class="string">查询所有结果</span></span><br><span class="line"><span class="string">filter(**kwargs):</span> <span class="string">它包含了与所给筛选条件相匹配的对象</span></span><br><span class="line"><span class="string">get(**kwargs):</span> <span class="string">返回与所给筛选条件相匹配的对象，返回结果有且只有一个，如果符合筛选条件的对象超过一个或者没有都会抛出错误。</span></span><br><span class="line"><span class="string">exclude(**kwargs):</span> <span class="string">它包含了与所给筛选条件不匹配的对象</span></span><br><span class="line"><span class="string">values(*field):</span> <span class="string">返回一个ValueQuerySet</span> <span class="string">一个特殊的QuerySet，运行后得到的并不是一系列model的实例化对象，而是一个可迭代的字典序列</span></span><br><span class="line"><span class="string">values_list(*field):</span> <span class="string">它与values()非常相似，它返回的是一个元组序列，values返回的是一个字典序列</span></span><br><span class="line"><span class="string">order_by(*field):</span> <span class="string">对查询结果排序</span></span><br><span class="line"><span class="string">reverse():</span> <span class="string">对查询结果反向排序</span></span><br><span class="line"><span class="string">distinct():</span> <span class="string">从返回结果中剔除重复纪录</span></span><br><span class="line"><span class="string">count():</span> <span class="string">返回数据库中匹配查询(QuerySet)的对象数量。</span></span><br><span class="line"><span class="string">first():</span> <span class="string">返回第一条记录</span></span><br><span class="line"><span class="string">last():</span> <span class="string">返回最后一条记录</span></span><br><span class="line"><span class="string">exists():</span> <span class="string">如果QuerySet包含数据，就返回True，否则返回False</span></span><br><span class="line"><span class="string">annotate():</span> <span class="string">使用聚合函数</span></span><br><span class="line"><span class="string">dates():</span> <span class="string">根据日期获取查询集</span></span><br><span class="line"><span class="string">datetimes():</span> <span class="string">根据时间获取查询集</span></span><br><span class="line"><span class="string">none():</span> <span class="string">创建空的查询集</span></span><br><span class="line"><span class="string">union():</span> <span class="string">并集</span></span><br><span class="line"><span class="string">intersection():</span> <span class="string">交集</span></span><br><span class="line"><span class="string">difference():</span> <span class="string">差集</span></span><br><span class="line"><span class="string">select_related():</span> <span class="string">附带查询关联对象</span></span><br><span class="line"><span class="string">prefetch_related():</span> <span class="string">预先查询</span></span><br><span class="line"><span class="string">extra():</span> <span class="string">附加SQL查询</span></span><br><span class="line"><span class="string">defer():</span> <span class="string">不加载指定字段</span></span><br><span class="line"><span class="string">only():</span> <span class="string">只加载指定的字段</span></span><br><span class="line"><span class="string">using():</span> <span class="string">选择数据库</span></span><br><span class="line"><span class="string">select_for_update():</span> <span class="string">锁住选择的对象，直到事务结束。</span></span><br><span class="line"><span class="string">raw():</span> <span class="string">接收一个原始的SQL查询</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/05/01/Django%20%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" data-id="ckr0qt55b005qtwjw2lwm3xzh" data-title="Django 的数据库操作" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/03/Django%20%E7%9A%84%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Django 的员工信息系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/30/Django%20%E7%9A%84%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Django 的快速上手</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/go/">go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">通信协议</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LogBack/" rel="tag">LogBack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQTT/" rel="tag">MQTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrapy/" rel="tag">Scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/" rel="tag">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm/" rel="tag">arm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp/" rel="tag">frp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pygame/" rel="tag">pygame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="tag">回溯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" rel="tag">嵌入式Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" rel="tag">服务器搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" rel="tag">穷举法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag">通信协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Django/" style="font-size: 12.5px;">Django</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/JWT/" style="font-size: 11.25px;">JWT</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 11.25px;">Linux</a> <a href="/tags/LogBack/" style="font-size: 10px;">LogBack</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scrapy/" style="font-size: 10px;">Scrapy</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 18.75px;">SpringBoot</a> <a href="/tags/SpringSecurity/" style="font-size: 12.5px;">SpringSecurity</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/frp/" style="font-size: 10px;">frp</a> <a href="/tags/go/" style="font-size: 15px;">go</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/pygame/" style="font-size: 12.5px;">pygame</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">博客搭建</a> <a href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">回溯算法</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 13.75px;">多线程</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" style="font-size: 10px;">嵌入式Linux</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 11.25px;">微信小程序</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10px;">快捷键</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 11.25px;">日志</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">服务器搭建</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10px;">树莓派</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 11.25px;">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">环境配置</a> <a href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" style="font-size: 10px;">穷举法</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 13.75px;">笔记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 12.5px;">设计模式</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 17.5px;">语法</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">通信协议</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 10px;">阿里云</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/12/T/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/10/Spring%20%E4%B8%AD%E7%9A%849%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Spring 中的9种设计模式</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/08/JAVA%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">JAVA 排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/05/%E4%BD%BF%E7%94%A8%20frp%20%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">使用 frp 搭建内网穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/20/JVM%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">JVM 垃圾回收</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

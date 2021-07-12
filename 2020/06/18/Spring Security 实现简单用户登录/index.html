@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Spring Security 实现简单用户登录 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Spring Security 实现简单用户登录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Security 实现简单用户登录">
+<meta property="og:url" content="http://example.com/2020/06/18/Spring%20Security%20%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Spring Security 实现简单用户登录">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/pimVy6AjDWUZM7u.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/FEX7MS9hPQUJzr4.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/4Bnb1AQcwWXoiOM.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/tqICSd7EmJLFOue.png">
+<meta property="article:published_time" content="2020-06-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-12T06:39:36.825Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="SpringSecurity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/pimVy6AjDWUZM7u.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Spring Security 实现简单用户登录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/06/18/Spring%20Security%20%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" class="article-date">
+  <time class="dt-published" datetime="2020-06-17T16:00:00.000Z" itemprop="datePublished">2020-06-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Spring/">Spring</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Spring Security 实现简单用户登录
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-Security-实现简单用户登录"><a href="#Spring-Security-实现简单用户登录" class="headerlink" title="Spring Security 实现简单用户登录"></a>Spring Security 实现简单用户登录</h1><h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><h3 id="1-框架介绍"><a href="#1-框架介绍" class="headerlink" title="1. 框架介绍"></a>1. 框架介绍</h3><p>一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方式的安全框架（简单说是对访问权限进行控制）</p>
+<p>应用的安全性包括用户认证（Authentication）和用户授权（Authorization）两个部分。</p>
+<ul>
+<li><p>用户认证指的是验证某个用户是否为系统中的合法主体，也就是说用户能否访问该系统。用户认证一般要求用户提供用户名和密码。系统通过校验用户名和密码来完成认证过程。</p>
+</li>
+<li><p>用户授权指的是验证某个用户是否有权限执行某个操作。在一个系统中，不同用户所具有的权限是不同的。比如对一个文件来说，有的用户只能进行读取，而有的用户可以进行修改。一般来说，系统会为不同的用户分配不同的角色，而每个角色则对应一系列的权限。   </p>
+</li>
+</ul>
+<p>spring security的主要核心功能为 <strong>认证和授权</strong>，所有的架构也是基于这两个核心功能去实现的。</p>
+<h3 id="2-框架原理"><a href="#2-框架原理" class="headerlink" title="2. 框架原理"></a>2. 框架原理</h3><p>众所周知 想要对对Web资源进行保护，最好的办法莫过于Filter，要想对方法调用进行保护，最好的办法莫过于AOP。所以springSecurity在我们进行用户认证以及授予权限的时候，通过各种各样的拦截器来控制权限的访问，从而实现安全。</p>
+<p>如下为其主要过滤器 </p>
+<ol>
+<li>WebAsyncManagerIntegrationFilter</li>
+<li>SecurityContextPersistenceFilter </li>
+<li>HeaderWriterFilter </li>
+<li>CorsFilter </li>
+<li>LogoutFilter</li>
+<li>RequestCacheAwareFilter</li>
+<li>SecurityContextHolderAwareRequestFilter</li>
+<li>AnonymousAuthenticationFilter</li>
+<li>SessionManagementFilter</li>
+<li>ExceptionTranslationFilter</li>
+<li>FilterSecurityInterceptor</li>
+<li>UsernamePasswordAuthenticationFilter</li>
+<li>BasicAuthenticationFilter</li>
+</ol>
+<h3 id="3-框架的核心组件"><a href="#3-框架的核心组件" class="headerlink" title="3. 框架的核心组件"></a>3. 框架的核心组件</h3><ul>
+<li><code>SecurityContextHolder</code>：提供对SecurityContext的访问</li>
+<li><code>SecurityContext</code>：持有Authentication对象和其他可能需要的信息</li>
+<li> <code>AuthenticationManager </code>：其中可以包含多个AuthenticationProvide</li>
+<li><code>ProviderManager</code>：对象为AuthenticationManager接口的实现类</li>
+<li><code>AuthenticationProvider </code>：主要用来进行认证操作的类 调用其中的authenticate()方法去进行认证操作</li>
+<li><code> Authentication</code>：Spring Security方式的认证主体</li>
+<li><code>GrantedAuthority</code>：对认证主题的应用层面的授权，含当前用户的权限信息，通常使用角色表示</li>
+<li><code>UserDetails</code>：构建Authentication对象必须的信息，可以自定义，可能需要访问DB得到</li>
+<li><code>UserDetailsService</code>：通过username构建UserDetails对象，通过loadUserByUsername根据userName获取UserDetail对象 （可以在这里基于自身业务进行自定义的实现  如通过数据库，xml,缓存获取等）           </li>
+</ul>
+<h2 id="二、项目搭建"><a href="#二、项目搭建" class="headerlink" title="二、项目搭建"></a>二、项目搭建</h2><p>这里我们直接用 IDEA 来为我们自动创建一个 SpringBoot 工程</p>
+<p><img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/pimVy6AjDWUZM7u.png"></p>
+<p>配置一个简单的映射之后我们启动项目</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.fabian4.securitydemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问<code>http://localhost:8080/</code>却发现</p>
+<p><img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/FEX7MS9hPQUJzr4.png"></p>
+<p>很明显我们导入的 SpringSecurity 起了作用，但由于 SpringBoot的一贯原则 <strong>约定大于配置</strong> ，在我们没有对其配置的情况下，为我们采用了默认的配置，这里的用户名默认是 <code>user</code>，密码在启动时已经打印在控制台了</p>
+<p><img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/4Bnb1AQcwWXoiOM.png"></p>
+<p>在输入完账号密码之后我们就能正常访问我们的页面了。</p>
+<h2 id="三、账号密码配置"><a href="#三、账号密码配置" class="headerlink" title="三、账号密码配置"></a>三、账号密码配置</h2><h3 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1. 配置文件"></a>1. 配置文件</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.security.user.name</span>=<span class="string">admin</span></span><br><span class="line"><span class="meta">spring.security.user.password</span>=<span class="string">admin</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-内存配置"><a href="#2-内存配置" class="headerlink" title="2. 内存配置"></a>2. 内存配置</h3><p>通过编写配置类，继承<code>WebSecurityConfigurerAdapter</code>来实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.fabian4.securitydemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        auth.inMemoryAuthentication().passwordEncoder(<span class="keyword">new</span> BCryptPasswordEncoder())</span><br><span class="line">                .withUser(<span class="string">&quot;admin&quot;</span>).password(<span class="keyword">new</span> BCryptPasswordEncoder().encode(<span class="string">&quot;admin&quot;</span>)).roles(<span class="string">&quot;admin&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、通过数据库配置账号密码"><a href="#四、通过数据库配置账号密码" class="headerlink" title="四、通过数据库配置账号密码"></a>四、通过数据库配置账号密码</h2><h3 id="1-修改配置类"><a href="#1-修改配置类" class="headerlink" title="1. 修改配置类"></a>1. 修改配置类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.fabian4.securitydemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CustomUserDetailsService userDatailService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 指定加密方式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PasswordEncoder <span class="title">passwordEncoder</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 使用BCrypt加密密码</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BCryptPasswordEncoder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        auth</span><br><span class="line">                <span class="comment">// 从数据库读取的用户进行身份认证</span></span><br><span class="line">                .userDetailsService(userDatailService)</span><br><span class="line">                .passwordEncoder(passwordEncoder());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-准备一个基本用户信息类"><a href="#2-准备一个基本用户信息类" class="headerlink" title="2. 准备一个基本用户信息类"></a>2. 准备一个基本用户信息类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.fabian4.securitydemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String role;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 忽略 get和set方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-重写一个-Service-方法"><a href="#3-重写一个-Service-方法" class="headerlink" title="3. 重写一个 Service 方法"></a>3. 重写一个 Service 方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.fabian4.securitydemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserInfoService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserInfo <span class="title">getUserInfo</span><span class="params">(String username)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 这里模拟数据库操作</span></span><br><span class="line">        <span class="keyword">if</span> (username.equals(<span class="string">&quot;admin&quot;</span>))&#123;</span><br><span class="line">            UserInfo userInfo = <span class="keyword">new</span> UserInfo();</span><br><span class="line">            userInfo.setUsername(<span class="string">&quot;admin&quot;</span>);</span><br><span class="line">            userInfo.setPassword(<span class="string">&quot;admin&quot;</span>);</span><br><span class="line">            userInfo.setRole(<span class="string">&quot;admin&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> userInfo;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们启动项目就达到我们的效果了</p>
+<h2 id="五、认证流程"><a href="#五、认证流程" class="headerlink" title="五、认证流程"></a>五、认证流程</h2><p><img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/tqICSd7EmJLFOue.png" alt="image-20200619140910864"></p>
+<h2 id="六、核心过滤器"><a href="#六、核心过滤器" class="headerlink" title="六、核心过滤器"></a>六、核心过滤器</h2><h3 id="1-SecurityContextPersistenceFilter"><a href="#1-SecurityContextPersistenceFilter" class="headerlink" title="1. SecurityContextPersistenceFilter"></a>1. SecurityContextPersistenceFilter</h3><ul>
+<li>以前是HttpSesstionContextIntegrationFilter,位于过滤器的顶端，是第一个起作用的过滤器</li>
+<li>第一个用途：在执行其他过滤器之前，率先判断用户的session是否已经存在了一个spring security上下文的securityContext,如果存在，就把securityContext拿出来，放在securityContextHolder中，供security的其他部分使用。如果不存在，就创建一个securityContext出来，放在securityContextHolder中，供security的其他部分使用。</li>
+<li>第二个用途：在所有过滤器执行完毕后，清空securityContextHolder中的内容，因为securityContextHolder是基于ThreadLocal的，如果不清空，会受到服务器线程池机制的影响。</li>
+<li>ThreadLocal存放的值是线程内共享的，线程间互斥的，主要用于线程内共享一些数据，避免通过参数来传递。这样处理后，能够解决实际中的一些并发问题。ThreadLocalMap是ThreadLocal的一个内部类，是不对外使用的。当使用ThreadLocal存值时，首先获取到当前线程对象，然后获取到当前线程本地对象，本地变量map,最后将当前使用的所有local和传入的值放在map中。也就是说ThreadLocalMap中的key是ThreadLocal对象。这样，每个线程都对应一个本地的map,所以，一个线程可以存在多个线程本地变量。</li>
+<li>ThreadLocal是解决线程并发问题的一个很好的思路，通过对每个线程提供一个独立的变量副本，解决线程并发访问变量的一个冲突问题</li>
+<li>当一个线程结束的时候，记得把ThreadLocal里的变量移除掉remove();</li>
+</ul>
+<h3 id="2-LogoutFilter"><a href="#2-LogoutFilter" class="headerlink" title="2. LogoutFilter"></a>2. LogoutFilter</h3><ul>
+<li>只处理注销请求。在用户发送注销请求时，销毁用户的session,清空securityContextHolder,重定向到注销成功页面</li>
+</ul>
+<h3 id="3-AbstractAuthenticationProcessingFilter"><a href="#3-AbstractAuthenticationProcessingFilter" class="headerlink" title="3. AbstractAuthenticationProcessingFilter"></a>3. AbstractAuthenticationProcessingFilter</h3><ul>
+<li>处理form登录的过滤器，与form登录有关的操作都在此进行。</li>
+</ul>
+<h3 id="4-DefaultLoginPageGeneratingFilter"><a href="#4-DefaultLoginPageGeneratingFilter" class="headerlink" title="4. DefaultLoginPageGeneratingFilter"></a>4. DefaultLoginPageGeneratingFilter</h3><ul>
+<li>用来生成一个默认的登录页面，默认的访问地址为spring_security_login,这个登录页面虽然支持用户输入用户名密码，也支持remember me等功能，但是因为太难看了，只能在演示时做个样子，不能直接在实际项目中使用</li>
+</ul>
+<h3 id="5-BasicAutenticationFilter"><a href="#5-BasicAutenticationFilter" class="headerlink" title="5. BasicAutenticationFilter"></a>5. BasicAutenticationFilter</h3><ul>
+<li>用来进行basic验证</li>
+</ul>
+<h3 id="6-SecurityContextHolderAwareRequestFilter"><a href="#6-SecurityContextHolderAwareRequestFilter" class="headerlink" title="6. SecurityContextHolderAwareRequestFilter"></a>6. SecurityContextHolderAwareRequestFilter</h3><ul>
+<li>用来包装客户的请求，目的是在原来请求的基础上，为后续程序提供一些额外的数据，比如getRomoteUser时，直接返回当前登录的用户名</li>
+</ul>
+<h3 id="7-RememberMeAuthenticationFilter"><a href="#7-RememberMeAuthenticationFilter" class="headerlink" title="7. RememberMeAuthenticationFilter"></a>7. RememberMeAuthenticationFilter</h3><ul>
+<li>实现Remember me功能，当用户cookie中存在remember me标记时，它会根据标记自动实现用户登录，并创建securityContext,授予对应的权限。spring security中的remember me依赖cookie实现，用户在登录时选择remember me,系统就会在登录成功后为用户生成一个唯一的标识，并将这个标识保存进cookie中，我们可以通过浏览器查看用户电脑中的cookie</li>
+</ul>
+<h3 id="8-AnonymousAutenticationFilter"><a href="#8-AnonymousAutenticationFilter" class="headerlink" title="8. AnonymousAutenticationFilter"></a>8. AnonymousAutenticationFilter</h3><ul>
+<li>当用户没有登录时，默认为用户分配匿名用户的权限</li>
+</ul>
+<h3 id="9-ExceptionTranslationFilter"><a href="#9-ExceptionTranslationFilter" class="headerlink" title="9. ExceptionTranslationFilter"></a>9. ExceptionTranslationFilter</h3><ul>
+<li>处理filterSecurityInterceptor中抛出的异常，然后将请求重定向到对应页面，或返回应用的错误代码</li>
+</ul>
+<h3 id="10-SessionManagementFilter"><a href="#10-SessionManagementFilter" class="headerlink" title="10. SessionManagementFilter"></a>10. SessionManagementFilter</h3><ul>
+<li>在用户登录成功之后，销毁用户的当前session，并重新生成一个session</li>
+</ul>
+<h3 id="11-filterSecurityInterceptor"><a href="#11-filterSecurityInterceptor" class="headerlink" title="11. filterSecurityInterceptor"></a>11. filterSecurityInterceptor</h3><ul>
+<li>用户的权限控制都包含在这个过滤器中</li>
+<li>第一个功能，如果用户尚未登录，抛出尚未认证的异常</li>
+<li>第二个功能，如果用户已登录，但是没有访问当前资源的权限，会抛出拒绝访问的异常</li>
+<li>第三个功能，如果用户已登录，也具有访问当前资源的权限，那么放行</li>
+</ul>
+<h3 id="12-FilterChainProxy"><a href="#12-FilterChainProxy" class="headerlink" title="12. FilterChainProxy"></a>12. FilterChainProxy</h3><ul>
+<li>按照顺序调用一组filter,使他们既能完成验证授权的本职工作，又能相应spring Ioc的功能来很方便地得到其他依赖的资源</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/06/18/Spring%20Security%20%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-id="ckr0qt53m0013twjwexbn33n3" data-title="Spring Security 实现简单用户登录" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/19/JWT%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D%E5%92%8C%E7%BB%84%E6%88%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JWT的基本介绍和组成
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%99%BB%E5%BD%95%E2%80%94%E2%80%94%E7%94%A8%E6%88%B7%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E8%A7%A3%E5%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">小程序登录——用户个人信息解密</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/go/">go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">通信协议</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LogBack/" rel="tag">LogBack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQTT/" rel="tag">MQTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrapy/" rel="tag">Scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/" rel="tag">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm/" rel="tag">arm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp/" rel="tag">frp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pygame/" rel="tag">pygame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="tag">回溯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" rel="tag">嵌入式Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" rel="tag">服务器搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" rel="tag">穷举法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag">通信协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Django/" style="font-size: 12.5px;">Django</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/JWT/" style="font-size: 11.25px;">JWT</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 11.25px;">Linux</a> <a href="/tags/LogBack/" style="font-size: 10px;">LogBack</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scrapy/" style="font-size: 10px;">Scrapy</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 18.75px;">SpringBoot</a> <a href="/tags/SpringSecurity/" style="font-size: 12.5px;">SpringSecurity</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/frp/" style="font-size: 10px;">frp</a> <a href="/tags/go/" style="font-size: 15px;">go</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/pygame/" style="font-size: 12.5px;">pygame</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">博客搭建</a> <a href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">回溯算法</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 13.75px;">多线程</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" style="font-size: 10px;">嵌入式Linux</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 11.25px;">微信小程序</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10px;">快捷键</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 11.25px;">日志</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">服务器搭建</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10px;">树莓派</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 11.25px;">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">环境配置</a> <a href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" style="font-size: 10px;">穷举法</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 13.75px;">笔记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 12.5px;">设计模式</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 17.5px;">语法</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">通信协议</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 10px;">阿里云</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/12/T/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/10/Spring%20%E4%B8%AD%E7%9A%849%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Spring 中的9种设计模式</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/08/JAVA%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">JAVA 排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/05/%E4%BD%BF%E7%94%A8%20frp%20%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">使用 frp 搭建内网穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/20/JVM%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">JVM 垃圾回收</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

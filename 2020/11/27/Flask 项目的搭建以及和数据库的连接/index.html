@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Flask 项目的搭建以及和数据库的连接 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Flask 项目的搭建以及和数据库的连接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask 项目的搭建以及和数据库的连接">
+<meta property="og:url" content="http://example.com/2020/11/27/Flask%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%BF%9E%E6%8E%A5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Flask 项目的搭建以及和数据库的连接">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/2xcZ6NQPXslqdvo.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/sJ5yCWcr76f4VIj.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/87RhVXkDZ46fzgB.png">
+<meta property="og:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/fzByh1NcdlXSRpv.png">
+<meta property="article:published_time" content="2020-11-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-12T06:39:36.547Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="Flask">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/2xcZ6NQPXslqdvo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Flask 项目的搭建以及和数据库的连接" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/11/27/Flask%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%BF%9E%E6%8E%A5/" class="article-date">
+  <time class="dt-published" datetime="2020-11-26T16:00:00.000Z" itemprop="datePublished">2020-11-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Flask 项目的搭建以及和数据库的连接
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Flask-项目的搭建以及和数据库的连接"><a href="#Flask-项目的搭建以及和数据库的连接" class="headerlink" title="Flask 项目的搭建以及和数据库的连接"></a>Flask 项目的搭建以及和数据库的连接</h1><h2 id="一、基于Python的后端框架"><a href="#一、基于Python的后端框架" class="headerlink" title="一、基于Python的后端框架"></a>一、基于Python的后端框架</h2><p>这里就只列举 <strong>Django</strong>、<strong>Flask</strong> 两个web框架</p>
+<h3 id="1-Django"><a href="#1-Django" class="headerlink" title="1. Django"></a>1. Django</h3><ul>
+<li>Django是一个开源的Python Web应用框架，采用了<strong>MVT的框架模式，即模型M，视图V和模版T</strong>，最早于2005年发布。</li>
+<li>Django被认为是”大而全”的重量级Web框架，其自带大量的常用工具和组件（比如数据库ORM组件、用户认证、权限管理、分页、缓存), 甚至还自带了管理后台Admin，适合快速开发功能完善的企业级网站。</li>
+<li>Django自带免费的数据SQLite，同时支持MySQL与PostgreSQL等多种数据库。</li>
+<li>Django项目的结构布局是刚性的，每个人写的项目结构最后都差不多，你可以清楚地知道在哪个APP的哪个文件夹里找到哪个文件(media目录, static目录, template目录，views.py, models.py, forms.py, etc)。</li>
+</ul>
+<h3 id="2-Flask"><a href="#2-Flask" class="headerlink" title="2. Flask"></a>2. Flask</h3><ul>
+<li>Flask是一个由Python语言写成的轻量级Web框架，最早由奥地利人Armin Ronacher于2010年发布。</li>
+<li>Flask最显著的特点是它是一个“微”框架，轻便灵活，但同时又易于扩展。</li>
+<li>默认情况下，Flask 只相当于一个内核，不包含数据库抽象层(ORM)、用户认证、表单验证、发送邮件等其它Web框架经常包含的功能。</li>
+<li>Flask依赖用各种灵活的扩展（比如邮件Flask-Mail，用户认证Flask-Login，数据库Flask-SQLAlchemy）来给Web应用添加额外功能。<strong>Flask的这种按需扩展的灵活性是很多程序员喜欢它的地方</strong></li>
+<li>Flask没有指定的数据库，可以用MySQL，也可以用 NoSQL。</li>
+<li>在项目结构上，Flask是很灵活的，你可以随意地组织自己的代码，1000个APP说不定就有有1000种组织代码的方式。</li>
+</ul>
+<blockquote>
+<p>如果你只需要开发一个轻量级网站或者特定的微服务（比如API)，你根本用不上Django自带的大而全的组件和功能，这时你应该毫不犹豫地选择Flask。当你想尝试新的技术时，使用Flask也会是个更好的选择，轻便而灵活。如果你的开发项目目标明确，就是要开发包含各种功能的传统企业级网站（比如电商，新闻内容管理，社交网站，办公OA)，使用Django能帮你节省不少寻找或开发第三方扩展的精力。开发企业级网站通常由一个团队来进行，Django可插拔式的APP设计思想和刚性的项目结构便于团队后期维护项目代码。从个性上而言，如果你喜欢自由灵活，你就选Flask。</p>
+</blockquote>
+<h2 id="二、开始你的第一个-Flask"><a href="#二、开始你的第一个-Flask" class="headerlink" title="二、开始你的第一个 Flask"></a>二、开始你的第一个 Flask</h2><p>使用 pip 安装 flask</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flask</span><br></pre></td></tr></table></figure>
+
+<img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/2xcZ6NQPXslqdvo.png" alt="image-20201202200814274" style="zoom: 33%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app.py</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+<p>运行程序之后，就默认在 5000 端口，访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:5000/">http://127.0.0.1:5000</a></p>
+<img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/sJ5yCWcr76f4VIj.png" alt="image-20201202202330844" style="zoom: 33%;" />
+
+<img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/87RhVXkDZ46fzgB.png" style="zoom: 33%;" />
+
+<p><strong>项目启动参数：</strong></p>
+<ul>
+<li>debug：是否开启调试模式，默认为False；开启后会有出错调试信息，文件会自动加载。</li>
+<li>threaded：是否开启多线程，默认为Flase。</li>
+<li>host：指定主机，默认为’127.0.0.1’，设置为’0.0.0.0’后可以通过IP进制访问</li>
+<li>port：指定端口，默认为5000。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.run(debug=<span class="literal">True</span>, threaded=<span class="literal">True</span>, host=‘<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>’, port=<span class="number">5555</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、使用蓝图-Blueprint-项目模块化"><a href="#三、使用蓝图-Blueprint-项目模块化" class="headerlink" title="三、使用蓝图 Blueprint    项目模块化"></a>三、使用蓝图 Blueprint    项目模块化</h2><p><strong>随着flask程序越来越复杂,我们需要对程序进行模块化的处理</strong></p>
+<p>简单来说，Blueprint 是一个存储视图方法的容器，这些操作在这个Blueprint 被注册到一个应用之后就可以被调用，Flask 可以通过Blueprint来组织URL以及处理请求。</p>
+<p>Flask使用Blueprint让应用实现模块化，在Flask中，Blueprint具有如下属性：</p>
+<ul>
+<li>一个项目可以具有多个Blueprint</li>
+<li>可以将一个Blueprint注册到任何一个未使用的URL下比如 “/”、“/sample”或者子域名</li>
+<li>在一个应用中，一个模块可以注册多次</li>
+<li>Blueprint可以单独具有自己的模板、静态文件或者其它的通用操作方法，它并不是必须要实现应用的视图和函数的</li>
+<li>在一个应用初始化时，就应该要注册需要使用的Blueprint</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install Blueprint</span><br></pre></td></tr></table></figure>
+
+<h3 id="controller-py"><a href="#controller-py" class="headerlink" title="controller.py"></a><code>controller.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Blueprint</span><br><span class="line"></span><br><span class="line">user_route = Blueprint(<span class="string">&#x27;user_route&#x27;</span>, <span class="string">&#x27;__name__&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@user_route.route(<span class="params"><span class="string">&#x27;/get&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;ok&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="app-py"><a href="#app-py" class="headerlink" title="app.py"></a><code>app.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> controller <span class="keyword">import</span> user_route</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">app.register_blueprint(user_route, url_prefix=<span class="string">&#x27;/user&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+<p>现在就能在 <a target="_blank" rel="noopener" href="http://127.0.0.1:5000/user/get">http://127.0.0.1:5000/user/get</a> 访问到这个接口了</p>
+<h2 id="四、接口参数和返回值"><a href="#四、接口参数和返回值" class="headerlink" title="四、接口参数和返回值"></a>四、接口参数和返回值</h2><h3 id="1-GET-请求参数"><a href="#1-GET-请求参数" class="headerlink" title="1. GET 请求参数"></a>1. GET 请求参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    request.get_data()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;ok&#x27;</span></span><br><span class="line"><span class="comment"># The return type must be a string, dict, tuple, Response instance, or WSGI callable</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-POST-请求参数"><a href="#2-POST-请求参数" class="headerlink" title="2. POST 请求参数"></a>2. POST 请求参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="comment"># 从form表单中获取参数</span></span><br><span class="line">    request.form.get(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">    request.form.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;ok&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-路径请求参数"><a href="#3-路径请求参数" class="headerlink" title="3. 路径请求参数"></a>3. 路径请求参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&lt;int:param&gt; &#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>(<span class="params">param</span>):</span></span><br><span class="line">    <span class="keyword">return</span> param</span><br><span class="line"><span class="comment"># 这里也可以不指定参数类型，只写&lt;param&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="五、Mysql-数据库连接"><a href="#五、Mysql-数据库连接" class="headerlink" title="五、Mysql 数据库连接"></a>五、Mysql 数据库连接</h2><h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install flask_sqlalchemy</span><br><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建表"><a href="#2-创建表" class="headerlink" title="2. 创建表"></a>2. 创建表</h3><ul>
+<li><p><code>app.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="comment"># 读取配置文件</span></span><br><span class="line">app.config.from_pyfile(<span class="string">&#x27;config.py&#x27;</span>)</span><br><span class="line"><span class="comment"># 初始化数据库连接</span></span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;ok&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></li>
+<li><p><code>config.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据库配置</span></span><br><span class="line">USERNAME = <span class="string">&#x27;root&#x27;</span></span><br><span class="line">PASSWORD = <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">HOST = <span class="string">&#x27;127.0.0.1&#x27;</span></span><br><span class="line">PORT = <span class="string">&#x27;3306&#x27;</span></span><br><span class="line">DATABASE = <span class="string">&#x27;raspberry&#x27;</span>  <span class="comment"># 数据库名</span></span><br><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql+pymysql://&#123;&#125;:&#123;&#125;@&#123;&#125;:&#123;&#125;/&#123;&#125;?charset=utf8&#x27;</span>.<span class="built_in">format</span>(</span><br><span class="line">    USERNAME, PASSWORD, HOST, PORT, DATABASE)</span><br></pre></td></tr></table></figure></li>
+<li><p><code>models.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> db</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="params">db.Model</span>):</span></span><br><span class="line">    user_id = db.Column(db.Integer, autoincrement=<span class="literal">True</span>, primary_key=<span class="literal">True</span>)</span><br><span class="line">    username = db.Column(db.String(<span class="number">20</span>), nullable=<span class="literal">False</span>)</span><br><span class="line">    password = db.Column(db.String(<span class="number">20</span>), nullable=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 类似Java中重写toString方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">        info = &#123;</span><br><span class="line">            <span class="string">&#x27;user_id&#x27;</span>: self.user_id,</span><br><span class="line">            <span class="string">&#x27;username&#x27;</span>: self.username,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span>: self.password</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(info)</span><br></pre></td></tr></table></figure></li>
+<li><p>在控制台中</p>
+<img src="https://fabian.oss-cn-hangzhou.aliyuncs.com/img/fzByh1NcdlXSRpv.png" alt="image-20201203103424014" style="zoom:33%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> app</span><br><span class="line">app.db.create_all()</span><br></pre></td></tr></table></figure>
+
+<p>此时flask就会自动帮我们在数据库中建立数据表</p>
+</li>
+</ul>
+<h3 id="3-增删改查"><a href="#3-增删改查" class="headerlink" title="3. 增删改查"></a>3. 增删改查</h3><p>  <strong>只要在项目中引入 <code>app.py</code> 中的 db 对象后，就可以通过 db.session 这一对象来执行对数据库的增删改查操作</strong></p>
+<ul>
+<li><p>增加数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add_user = User(<span class="number">1</span>, <span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br><span class="line">db.session.add(add_user)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure></li>
+<li><p>查询数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 返回一个list</span></span><br><span class="line">db.session.query(User).<span class="built_in">all</span>()</span><br><span class="line"><span class="comment"># filter 条件查询</span></span><br><span class="line">db.session.query(User).<span class="built_in">filter</span>(User.<span class="built_in">id</span> &gt;= <span class="number">3</span>).<span class="built_in">all</span>()</span><br><span class="line"><span class="comment"># 只取第一个</span></span><br><span class="line">db.session.query(User).<span class="built_in">filter</span>(User.<span class="built_in">id</span> &gt;= <span class="number">3</span>).first()</span><br></pre></td></tr></table></figure></li>
+<li><p>删除数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要先查询拿出对象</span></span><br><span class="line">db.session.delete(article)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure></li>
+<li><p>修改数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.session.query(User).<span class="built_in">filter</span>(User.<span class="built_in">id</span> == <span class="number">1</span>).update(&#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;root&#x27;</span>&#125;)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="六、MQTT-消息队列连接"><a href="#六、MQTT-消息队列连接" class="headerlink" title="六、MQTT 消息队列连接"></a>六、MQTT 消息队列连接</h2><h3 id="1-安装依赖-1"><a href="#1-安装依赖-1" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install paho-mqtt</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-配置参数-config-py"><a href="#2-配置参数-config-py" class="headerlink" title="2. 配置参数      config.py"></a>2. 配置参数      <code>config.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mqtt配置</span></span><br><span class="line">instanceId = <span class="string">&#x27;XXXXXXXXXXXXX&#x27;</span></span><br><span class="line">accessKey = <span class="string">&#x27;XXXXXXXXXX&#x27;</span></span><br><span class="line">secretKey = <span class="string">&#x27;XXXXXXXXXXXXXXXXXXX&#x27;</span></span><br><span class="line">groupId = <span class="string">&#x27;XXXXXXXXXXXX&#x27;</span></span><br><span class="line">client_id = groupId + <span class="string">&#x27;@@@&#x27;</span> + <span class="string">&#x27;XXX&#x27;</span></span><br><span class="line">topic = <span class="string">&#x27;XXXXXXXXXXXXXXXXXXX&#x27;</span></span><br><span class="line">brokerUrl = <span class="string">&#x27;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#x27;</span></span><br><span class="line">targetId = <span class="string">&#x27;XXXXXXXXXXXXXXXXXXXXXXXXXX&#x27;</span></span><br><span class="line">username = <span class="string">&#x27;Signature&#x27;</span> + <span class="string">&#x27;|&#x27;</span> + accessKey + <span class="string">&#x27;|&#x27;</span> + instanceId</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-连接服务器"><a href="#3-连接服务器" class="headerlink" title="3. 连接服务器"></a>3. 连接服务器</h3><ul>
+<li><p><code>mqtt.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha1</span><br><span class="line"><span class="keyword">from</span> paho.mqtt <span class="keyword">import</span> client <span class="keyword">as</span> mqtt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> client_id, secretKey, brokerUrl, topic, targetId, username</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_connect</span>(<span class="params">client, userdata, flags, rc</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;成功连接到MQTT服务器，用户ID：&#x27;</span> + client_id)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span>(<span class="params">client, userdata, msg</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;收到了：&#x27;</span> + msg.topic + <span class="string">&#x27; &#x27;</span> + <span class="built_in">str</span>(msg.payload))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_disconnect</span>(<span class="params">client, userdata, rc</span>):</span></span><br><span class="line">    <span class="keyword">if</span> rc != <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;意外失去连接 %s&#x27;</span> % rc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">client = mqtt.Client(client_id, protocol=mqtt.MQTTv311, clean_session=<span class="literal">True</span>)</span><br><span class="line">client.on_connect = on_connect</span><br><span class="line">client.on_message = on_message</span><br><span class="line">client.on_disconnect = on_disconnect</span><br><span class="line">password = base64.b64encode(hmac.new(secretKey.encode(), client_id.encode(), sha1).digest()).decode()</span><br><span class="line">client.username_pw_set(username, password)</span><br><span class="line">client.connect(brokerUrl, <span class="number">1883</span>, <span class="number">60</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_msg</span>(<span class="params">msg</span>):</span></span><br><span class="line">    client.publish(topic + <span class="string">&#x27;/p2p/&#x27;</span> + targetId, msg, qos=<span class="number">2</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p><code>app.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mqtt <span class="keyword">import</span> client, send_msg</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="comment"># 读取配置文件</span></span><br><span class="line">app.config.from_pyfile(<span class="string">&#x27;config.py&#x27;</span>)</span><br><span class="line"><span class="comment"># 连接MQTT</span></span><br><span class="line">client.loop_start()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    send_msg(<span class="string">&#x27;msg&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;ok&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>此时启动项目就会自动连接上服务器，访问接口就可以给指定主题发送信息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/27/Flask%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%BF%9E%E6%8E%A5/" data-id="ckr0qt5310001twjw2mfk29ki" data-title="Flask 项目的搭建以及和数据库的连接" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/07/Mysql%20%E8%A2%AB%E9%BB%91%E4%BB%A5%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Mysql 被黑以及数据库安全设置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/23/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95%E5%92%8CSSH%E8%BF%9E%E6%8E%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">树莓派的系统烧录和SSH连接</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/go/">go</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">通信协议</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LogBack/" rel="tag">LogBack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQTT/" rel="tag">MQTT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrapy/" rel="tag">Scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/" rel="tag">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm/" rel="tag">arm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp/" rel="tag">frp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pygame/" rel="tag">pygame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="tag">回溯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" rel="tag">嵌入式Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" rel="tag">服务器搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" rel="tag">穷举法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag">通信协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Django/" style="font-size: 12.5px;">Django</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/JWT/" style="font-size: 11.25px;">JWT</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 11.25px;">Linux</a> <a href="/tags/LogBack/" style="font-size: 10px;">LogBack</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scrapy/" style="font-size: 10px;">Scrapy</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 18.75px;">SpringBoot</a> <a href="/tags/SpringSecurity/" style="font-size: 12.5px;">SpringSecurity</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/frp/" style="font-size: 10px;">frp</a> <a href="/tags/go/" style="font-size: 15px;">go</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/pygame/" style="font-size: 12.5px;">pygame</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">博客搭建</a> <a href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">回溯算法</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 13.75px;">多线程</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" style="font-size: 10px;">嵌入式Linux</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 11.25px;">微信小程序</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10px;">快捷键</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 11.25px;">日志</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">服务器搭建</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10px;">树莓派</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 11.25px;">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">环境配置</a> <a href="/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/" style="font-size: 10px;">穷举法</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 13.75px;">笔记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 12.5px;">设计模式</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 17.5px;">语法</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">通信协议</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 10px;">阿里云</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/12/T/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/10/Spring%20%E4%B8%AD%E7%9A%849%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Spring 中的9种设计模式</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/08/JAVA%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">JAVA 排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/05/%E4%BD%BF%E7%94%A8%20frp%20%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">使用 frp 搭建内网穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/20/JVM%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">JVM 垃圾回收</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,161 @@
+:root {
+	--accent: #2d96bd;     /* Exact LoveIt Blue from site */
+	--black: #161209;      /* Exact text color from site */
+	--white: #fff;
+	--gray: #a9a9b3;
+	--gray-light: #f5f5f5;
+	--gray-dark: #161209;
+	--background: #ffffff;
+	--header-height: 3.5rem;
+	--border-color: #f0f0f0;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #292a2d;
+		--gray-dark: #a9a9b3;
+		--gray: #87878d;
+		--gray-light: #2d2d2d;
+		--border-color: #444;
+		--black: #a9a9b3;
+		--accent: #2d89ef; /* Previous light theme color used for dark theme */
+	}
+}
+
+/* Ensure .dark class on html works */
+html.dark, html[theme="dark"] {
+	--background: #292a2d;
+	--gray-dark: #a9a9b3;
+	--gray: #87878d;
+	--gray-light: #2d2d2d;
+	--border-color: #444;
+	--black: #a9a9b3;
+	--accent: #2d89ef;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Emoji, Helvetica, Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background: var(--background);
+	color: var(--gray-dark);
+	font-size: 16px;
+	line-height: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main {
+	flex: 1;
+	padding-top: var(--header-height);
+}
+
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: var(--black);
+	margin: 0 0 0.5rem 0;
+	line-height: 1.2;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+
+a {
+	color: var(--black);
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+a:hover {
+	color: var(--accent);
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid var(--border-color);
+	margin: 2rem 0;
+}
+
+/* Code Blocks & Blockquotes */
+pre, .astro-code {
+	padding: 1rem;
+	border-radius: 4px;
+	overflow-x: auto;
+	margin: 1.5rem 0;
+	font-family: var(--code-font-family, monospace);
+	font-size: 0.875rem;
+	/* Use Shiki variables if available, with fallbacks */
+	background-color: var(--shiki-light-bg, #f6f8fa) !important;
+	color: var(--shiki-light, #24292e) !important;
+}
+
+/* Dark mode overrides for code blocks */
+html.dark pre, 
+html.dark .astro-code,
+html.dark .astro-code span {
+	background-color: var(--shiki-dark-bg, #2d2d2d) !important;
+	color: var(--shiki-dark, #e1e4e8) !important;
+}
+
+/* Inline code */
+code {
+	padding: 0.2rem 0.4rem;
+	border-radius: 4px;
+	background-color: var(--gray-light);
+	font-size: 0.875rem;
+	font-family: var(--code-font-family, monospace);
+	color: var(--accent);
+}
+
+/* Don't apply background to code inside pre */
+pre code, .astro-code code {
+	background-color: transparent !important;
+	padding: 0;
+	color: inherit !important;
+}
+
+blockquote {
+	margin: 1.5rem 0;
+	padding: 0.5rem 1rem;
+	border-left: 0.25rem solid var(--accent);
+	color: var(--gray-dark);
+	background-color: var(--gray-light);
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

@@ -47,45 +47,13 @@ enableEmoji = true
         title = ""
         weight = 1
       [[languages.en.menu.main]]
-        identifier = "thought"
-        pre = ""
-        post = ""
-        name = "Thought"
-        url = "/thought"
-        title = ""
-        weight = 2
-      [[languages.en.menu.main]]
-        identifier = "collection"
-        pre = ""
-        post = ""
-        name = "Collection"
-        url = "/collection/"
-        title = ""
-        weight = 3
-      [[languages.en.menu.main]]
-        identifier = "draftbook"
-        pre = ""
-        post = ""
-        name = "Draftbook"
-        url = "/draftbook"
-        title = ""
-        weight = 4
-      [[languages.en.menu.main]]
-        identifier = "folio"
-        pre = ""
-        post = ""
-        name = "Folio"
-        url = "/folio"
-        title = ""
-        weight = 5
-      [[languages.en.menu.main]]
         identifier = "about"
         pre = ""
         post = ""
         name = "About"
         url = "/about/"
         title = ""
-        weight = 6
+        weight = 2
     [languages.en.params]
       # site description
       description = "Personal blog site"

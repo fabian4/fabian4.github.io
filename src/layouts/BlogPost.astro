@@ -1,70 +1,77 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import type { MarkdownHeading } from 'astro';
 
-type Props = Partial<CollectionEntry<'blog'>['data']> & {
-	title: string;
-	description: string;
+type Props = CollectionEntry<'blog'>['data'] & {
+	headings?: MarkdownHeading[];
+	slug?: string;
 };
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, date, updatedDate, heroImage, ogImage, headings = [], slug } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: var(--gray-dark);
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-		</style>
+		<BaseHead title={title} description={description} image={ogImage} slug={slug} type="article" />
 	</head>
 
-	<body>
+	<body class="flex flex-col min-h-screen">
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<h1>{title}</h1>
-						<hr />
+		<main class="flex-1 w-full max-w-[1200px] mx-auto px-6 sm:px-8 md:px-10 lg:px-8 pt-[var(--header-height)]">
+			<div class="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-[12rem_minmax(0,74ch)] gap-8 lg:gap-10 relative justify-center">
+				<!-- Sidebar (Desktop) -->
+				<aside class="hidden lg:block">
+					<div class="sticky top-[calc(var(--header-height)+4rem)] max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+						<TableOfContents headings={headings} />
 					</div>
-					<slot />
-				</div>
-			</article>
+				</aside>
+
+				<!-- Article Content -->
+				<article class="w-full min-w-0">
+					<div class="mb-4 sm:mb-6 lg:mb-10">
+						{heroImage && (
+							<div class="w-full mb-4 sm:mb-6 lg:mb-8">
+								<Image
+									width={1020}
+									height={510}
+									src={heroImage}
+									alt=""
+									loading="eager"
+									class="rounded-xl shadow-sm block mx-auto"
+								/>
+							</div>
+						)}
+						<div class="text-center">
+							<h1 class="text-2xl leading-tight sm:text-3xl sm:leading-normal lg:text-4xl font-bold tracking-tight text-black dark:text-white mb-3 sm:mb-4 lg:mb-6 text-balance">
+								{title}
+							</h1>
+						</div>
+					</div>
+
+					<div class="prose prose-sm sm:prose-base dark:prose-invert max-w-none
+						prose-headings:scroll-mt-20
+						prose-a:no-underline hover:prose-a:text-primary
+						prose-img:rounded-xl prose-img:shadow-sm">
+						<slot />
+
+						<!-- Article Terminator -->
+						<div class="mt-8 sm:mt-12 flex justify-center">
+							<div class="w-16 h-px bg-border"></div>
+						</div>
+					</div>
+				</article>
+			</div>
 		</main>
 		<Footer />
+		<script type="module">
+			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+			mermaid.initialize({ startOnLoad: true });
+		</script>
 	</body>
 </html>

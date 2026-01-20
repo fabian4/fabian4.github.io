@@ -1,161 +1,170 @@
-:root {
-	--accent: #2d96bd;     /* Exact LoveIt Blue from site */
-	--black: #161209;      /* Exact text color from site */
-	--white: #fff;
-	--gray: #a9a9b3;
-	--gray-light: #f5f5f5;
-	--gray-dark: #161209;
-	--background: #ffffff;
-	--header-height: 3.5rem;
-	--border-color: #f0f0f0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
+@layer base {
 	:root {
-		--background: #292a2d;
-		--gray-dark: #a9a9b3;
-		--gray: #87878d;
-		--gray-light: #2d2d2d;
-		--border-color: #444;
-		--black: #a9a9b3;
-		--accent: #2d89ef; /* Previous light theme color used for dark theme */
+		--accent: #2d96bd;
+		--black: #161209;
+		--white: #fff;
+		--gray: #a9a9b3;
+		--gray-light: #f5f5f5;
+		--gray-dark: #333;
+		--background: #ffffff;
+		--header-height: 4rem;
+		--border-color: #e5e7eb; /* hardened border color */
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--background: #1a1a1a;
+			--gray-dark: #c9c9c9;
+			--gray: #888;
+			--gray-light: #2a2a2a;
+			--border-color: #404040; /* hardened border color */
+			--black: #eee;
+			--accent: #5ab3d5;
+		}
+	}
+
+	html.dark, html[theme="dark"] {
+		--background: #1a1a1a;
+		--gray-dark: #c9c9c9;
+		--gray: #888;
+		--gray-light: #2a2a2a;
+		--border-color: #404040;
+		--black: #eee;
+		--accent: #5ab3d5;
+	}
+
+	body {
+		@apply bg-background text-foreground;
 	}
 }
 
-/* Ensure .dark class on html works */
-html.dark, html[theme="dark"] {
-	--background: #292a2d;
-	--gray-dark: #a9a9b3;
-	--gray: #87878d;
-	--gray-light: #2d2d2d;
-	--border-color: #444;
-	--black: #a9a9b3;
-	--accent: #2d89ef;
+/* Custom scrollbar for Webkit */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
 }
 
-* {
-	box-sizing: border-box;
+::-webkit-scrollbar-track {
+	background: transparent;
 }
 
-body {
-	font-family: system-ui, -apple-system, Segoe UI, Roboto, Emoji, Helvetica, Arial, sans-serif;
-	margin: 0;
-	padding: 0;
-	background: var(--background);
-	color: var(--gray-dark);
-	font-size: 16px;
-	line-height: 1.5rem;
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+::-webkit-scrollbar-thumb {
+	@apply bg-gray-300 dark:bg-gray-700 rounded-full;
 }
 
-.wrapper {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+::-webkit-scrollbar-thumb:hover {
+	@apply bg-gray-400 dark:bg-gray-600;
 }
 
-main {
-	flex: 1;
-	padding-top: var(--header-height);
-}
+/* Shiki Dual Theme Handling */
+/* Default (Light Mode) - Shiki inline styles handle this automatically. 
+   We don't need to force vars unless we want to override Shiki's default. */
 
-.container {
-	max-width: 960px;
-	margin: 0 auto;
-	padding: 0 1.5rem;
-}
-
-h1, h2, h3, h4, h5, h6 {
-	color: var(--black);
-	margin: 0 0 0.5rem 0;
-	line-height: 1.2;
-}
-
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.5rem; }
-
-a {
-	color: var(--black);
-	text-decoration: none;
-	transition: color 0.2s;
-}
-
-a:hover {
-	color: var(--accent);
-}
-
-img {
-	max-width: 100%;
-	height: auto;
-	display: block;
-}
-
-hr {
-	border: none;
-	border-top: 1px solid var(--border-color);
-	margin: 2rem 0;
-}
-
-/* Code Blocks & Blockquotes */
-pre, .astro-code {
-	padding: 1rem;
-	border-radius: 4px;
-	overflow-x: auto;
-	margin: 1.5rem 0;
-	font-family: var(--code-font-family, monospace);
-	font-size: 0.875rem;
-	/* Use Shiki variables if available, with fallbacks */
-	background-color: var(--shiki-light-bg, #f6f8fa) !important;
-	color: var(--shiki-light, #24292e) !important;
-}
-
-/* Dark mode overrides for code blocks */
-html.dark pre, 
+/* Dark Mode - Switch to dark theme vars */
 html.dark .astro-code,
 html.dark .astro-code span {
-	background-color: var(--shiki-dark-bg, #2d2d2d) !important;
-	color: var(--shiki-dark, #e1e4e8) !important;
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
-/* Inline code */
-code {
-	padding: 0.2rem 0.4rem;
-	border-radius: 4px;
-	background-color: var(--gray-light);
-	font-size: 0.875rem;
-	font-family: var(--code-font-family, monospace);
-	color: var(--accent);
+/* Code Block Container Styling - Authoritative Artifacts */
+.astro-code {
+	@apply rounded-md border border-border my-8 p-5 overflow-x-auto text-[0.85rem] leading-[1.6] shadow-sm;
+	font-family: var(--font-mono);
+	/* Ensure background separation from prose */
+	background-color: #f6f8fa !important; /* GitHub Light bg */
 }
 
-/* Don't apply background to code inside pre */
-pre code, .astro-code code {
-	background-color: transparent !important;
-	padding: 0;
-	color: inherit !important;
+html.dark .astro-code {
+	background-color: #24292e !important; /* GitHub Dark bg */
+	border-color: #444; /* Explicit border for dark mode artifacts */
 }
 
-blockquote {
-	margin: 1.5rem 0;
-	padding: 0.5rem 1rem;
-	border-left: 0.25rem solid var(--accent);
+/* Inline Code Styling - Subordinate */
+:not(pre) > code {
+	@apply relative rounded px-[0.3em] py-[0.1em] text-[0.85em] font-mono font-medium;
+	background-color: rgba(175, 184, 193, 0.2); /* Neutral gray wash */
+	color: var(--black); /* Keep text neutral/authoritative, avoid accent color for code */
+}
+
+/* Dark mode overrides for inline code */
+html.dark :not(pre) > code {
+	background-color: rgba(110, 118, 129, 0.4); /* Darker gray wash */
 	color: var(--gray-dark);
-	background-color: var(--gray-light);
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
-	clip-path: inset(50%);
-	white-space: nowrap;
+/* Blockquote - Force tight vertical margins */
+.prose blockquote {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.prose blockquote p {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.prose blockquote p:first-of-type {
+	margin-top: 0 !important;
+}
+
+.prose blockquote p:last-of-type {
+	margin-bottom: 0 !important;
+}
+
+/* Mobile-First Typography Optimizations */
+/* Tighter line-height and spacing on mobile for reduced scroll fatigue */
+@media (max-width: 640px) {
+	.prose-sm {
+		line-height: 1.6 !important;
+	}
+
+	.prose-sm p {
+		margin-top: 0.9em !important;
+		margin-bottom: 0.9em !important;
+	}
+
+	.prose-sm h2 {
+		margin-top: 1.8em !important;
+		margin-bottom: 0.7em !important;
+		line-height: 1.25 !important;
+	}
+
+	.prose-sm h3 {
+		margin-top: 1.5em !important;
+		margin-bottom: 0.6em !important;
+		line-height: 1.3 !important;
+	}
+
+	.prose-sm h4 {
+		margin-top: 1.2em !important;
+		margin-bottom: 0.5em !important;
+	}
+
+	.prose-sm blockquote {
+		font-size: 0.9em !important;
+		padding-top: 0.2em !important;
+		padding-bottom: 0.2em !important;
+	}
+
+	/* Reduce code block vertical margins on mobile */
+	.astro-code {
+		margin-top: 1.25rem !important;
+		margin-bottom: 1.25rem !important;
+		padding: 1rem !important;
+	}
+
+	/* Tighter list spacing on mobile */
+	.prose-sm ul > li,
+	.prose-sm ol > li {
+		margin-top: 0.35em !important;
+		margin-bottom: 0.35em !important;
+	}
 }

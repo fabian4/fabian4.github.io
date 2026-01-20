@@ -3,6 +3,7 @@ SITE_DESCRIPTION: 'Trade code for BEER ! 🍺'
 SITE_URL: 'https://fabian4.site'
 USER_NAME: 'Fabian Bao'
 GITHUB_USERNAME: 'fabian4'
+GOOGLE_ANALYTICS_ID: 'G-Y1J4J668V2'
 SOCIAL_LINKS:
   - href: 'https://github.com/fabian4'
     title: 'GitHub'
